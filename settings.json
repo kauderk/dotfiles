@@ -1,0 +1,631 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "git.enabled": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.formatOnSave": true,
+    "prettier.trailingComma": "none",
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": false,
+    "prettier.semi": false,
+    "prettier.singleQuote": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnType": true
+    },
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "explorer.sortOrder": "type",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.documentSelectors": ["**/*.astro"],
+    "[astro]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.accessibilitySupport": "off",
+    "git.confirmSync": false,
+    "javascript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "diffEditor.codeLens": true,
+    "window.newWindowDimensions": "inherit",
+    "workbench.editor.splitInGroupLayout": "vertical",
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.inlineSuggest.enabled": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": false,
+        "yaml": true,
+        "typescript": true,
+        "code-runner-output": true,
+        "jsonc": true,
+        "svelte": true,
+        "typescriptreact": true
+    },
+    "[markdown]": {
+        "editor.formatOnSave": false
+    },
+    "macros": {
+        "copyWithoutNewLine": [
+            "cursorHome",
+            "cursorEndSelect",
+            "editor.action.clipboardCopyAction",
+            "cancelSelection",
+            "cursorUndo",
+            "cursorUndo",
+            "cursorUndo"
+        ]
+    },
+    "git.ignoreRebaseWarning": true,
+    "files.exclude": {
+        "**/.git": false
+    },
+    "workbench.colorCustomizations": {
+        "[Verse (Dark)]": {
+            "editor.findMatchBackground": "#c78f2e",
+            "editor.findMatchHighlightBackground": "#735a32",
+
+            "editor.wordHighlightBackground": "#1880d6",
+            "editor.hoverHighlightBackground": "#2a627a",
+            "editor.wordHighlightStrongBackground": "#e90fdb",
+            "editor.selectionHighlightBackground": "#1b77b0"
+        },
+        "[Palenight Operator]": {
+            "sideBar.border": "#363b52e3",
+            "panel.border": "#363b52c7",
+            "sideBarSectionHeader.border": "#363b52c7",
+            "editor.findMatchBackground": "#9964c480",
+            "editor.findMatchHighlightBackground": "#9964c480",
+
+            "editor.wordHighlightBackground": "#648ac448",
+            "editor.hoverHighlightBackground": "#7264c463",
+            "editor.wordHighlightStrongBackground": "#6496c480",
+            "editor.selectionHighlightBackground": "#c4aa6449",
+
+            "tab.activeForeground": "#7a7a7a",
+            "tab.inactiveForeground": "#888888"
+        }
+    },
+    "terminal.integrated.rightClickBehavior": "default",
+
+    "omnisharp.autoStart": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "svelte.enable-ts-plugin": true,
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "debug.allowBreakpointsEverywhere": true,
+    "[svelte]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.tslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "editor.formatOnSaveMode": "file",
+    "omnisharp.useModernNet": false,
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "on"
+    },
+    "[ahk]": {
+        "editor.defaultFormatter": "cweijan.vscode-autohotkey-plus"
+    },
+    "vscode-ahk-plus.enableIntelliSense": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "debug.inlineValues": "on",
+    "workbench.editor.labelFormat": "short",
+    "cSpell.userWords": [
+        "Eboshi",
+        "endregion",
+        "kauderk",
+        "marko",
+        "perlevel",
+        "Woah"
+    ],
+    "svelte.plugin.svelte.note-new-transformation": false,
+    "git-autoconfig.configList": [
+        {
+            "user.email": "estudio2kau@gmail.com",
+            "user.name": "ramen-uppercut"
+        }
+    ],
+    "cSpell.enableFiletypes": ["!md"],
+    "workbench.iconTheme": "material-icon-theme",
+    "git.allowNoVerifyCommit": true,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false,
+    "liveServer.settings.https": {
+        "enable": true,
+        "cert": "C:\\Users\\kauder\\Documents\\installer\\server\\127.0.0.1.pem",
+        "key": "C:\\Users\\kauder\\Documents\\installer\\server\\127.0.0.1-key.pem",
+        "passphrase": "changeit"
+    },
+    "redhat.telemetry.enabled": true,
+    "rapidapi.terminalLink.enabled": false,
+    "python.terminal.activateEnvironment": false,
+    "totalTypeScript.hideAllTips": false,
+    "totalTypeScript.hideBasicTips": false,
+    "tabnine.experimentalAutoImports": true,
+    "debug.javascript.debugByLinkOptions": "always",
+    "totalTypeScript.hiddenTips": ["ts-object-type"],
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js, ${capture}.typegen.ts",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts, ${capture}.typegen.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml",
+        "*.mts": "${capture}.typegen.ts",
+        "*.cts": "${capture}.typegen.ts"
+    },
+    "extensions.ignoreRecommendations": true,
+    "explorer.confirmDelete": false,
+    "cody.serverEndpoint": "https://sourcegraph.com/",
+    "http.proxyAuthorization": null,
+    "[marko]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "marko.formatter.syntax": "concise",
+    "marko.trace.server": "verbose",
+    "workbench.activityBar.location": "top",
+    "workbench.tree.enableStickyScroll": true,
+    "git.ignoredRepositories": [
+        "c:\\Users\\kauder\\.vscode\\extensions\\stepsize.stepsize-1.0.15\\resources\\demo-repository"
+    ],
+    "gitlens.views.searchAndCompare.files.layout": "list",
+    "gitlens.mode.active": "zen",
+    "peacock.affectStatusBar": false,
+    "peacock.showColorInStatusBar": false,
+    "peacock.keepBadgeColor": true,
+    "diffEditor.useInlineViewWhenSpaceIsLimited": false,
+	"debug.onTaskErrors": "debugAnyway",
+    "git.openRepositoryInParentFolders": "never",
+    "keyboard.dispatch": "keyCode",
+
+    // "workbench.editorAssociations": {
+    //   "*.md": "vscode.markdown.preview.editor"
+    // },
+    // vim configuration
+    // "editor.lineNumbers": "relative",
+    "settings.cycle": [
+        {
+            "id": "hlsearch",
+            "values": [
+                {
+                    "vim.hlsearch": true
+                },
+                {
+                    "vim.hlsearch": false
+                }
+            ]
+        }
+    ], // recommended by neovim
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": false,
+    "vim.whichwrap": "h,l",
+    "vim.leader": " ",
+    // "vim.foldfix": true,
+    // To improve performance
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "vim.handleKeys": {
+        "<c-c>": true,
+        "<c-x>": true,
+        "<c-v>": true,
+        "<c-z>": true,
+        "<c-d>": true,
+        "<c-p>": true,
+        "<c-y>": true,
+        "<c-i>": true
+    },
+    "vim.insertModeKeyBindings": [
+        // {
+        //   // Pressing j twice ("before": ["j", "j"]) simulates the Esc key
+        //   "before": ["j", "j"],
+        //   "after": ["<Esc>"]
+        // },
+        // {
+        //   "before": ["<Esc>"],
+        //   "after": ["<c-o>", ":stopinsert", "<CR>"],
+        //   "silent": true
+        // },
+        {
+            "before": ["<C-h>"],
+            "after": ["<C-o>"]
+        }
+    ],
+    // "vim.commandLineModeKeyBindingsNonRecursive": [
+    //   {
+    //     "before": ["i"],
+    //     "after": ["k"]
+    //   },
+    //   {
+    //     "before": ["h"],
+    //     "after": ["i"]
+    //   },
+    //   {
+    //     "before": ["k"],
+    //     "after": ["j"]
+    //   },
+    //   {
+    //     "before": ["j"],
+    //     "after": ["h"]
+    //   }
+    // ],
+    "vim.operatorPendingModeKeyBindingsNonRecursive": [
+        {
+            "before": ["i"],
+            "after": ["k"]
+        },
+        {
+            "before": ["h"],
+            "after": ["i"]
+        },
+        {
+            "before": ["k"],
+            "after": ["j"]
+        },
+        {
+            "before": ["j"],
+            "after": ["h"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        { "before": ["i"], "after": ["g", "k"] },
+        // { "before": ["I"], "after": ["g", "k"] },
+        { "before": ["h"], "after": ["i"] },
+        { "before": ["k"], "after": ["g", "j"] },
+        // { "before": ["K"], "after": ["g", "j"] },
+        { "before": ["j"], "after": ["h"] },
+
+        {
+            // delete line to register _
+            "before": ["<leader>", "d"],
+            "after": ["\"", "_", "d", "d"]
+        },
+        {
+            // delete to register _
+            "before": ["<leader>", "x"],
+            "after": ["\"", "_", "x"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["i"], "commands": ["cursorUp"] },
+        { "before": ["I"], "after": ["g", "k"] },
+        { "before": ["h"], "after": ["i"] },
+        { "before": ["k"], "commands": ["cursorDown"] },
+        { "before": ["K"], "after": ["g", "j"] },
+        { "before": ["j"], "after": ["h"] },
+        {
+            "before": [">"],
+            "commands": ["indent"]
+        },
+        {
+            "before": ["<"],
+            "commands": ["outdent"]
+        },
+        // {
+        //   "before": ["I"],
+        //   "after": ["H"]
+        // },
+        {
+            "before": ["H"],
+            "after": ["I"]
+        },
+        {
+            // continuous word to lowercase
+            "before": ["<leader>", "i"],
+            "after": ["v", "a", "W", "u"]
+        },
+        {
+            // continuous word to uppercase
+            "before": ["<leader>", "u"],
+            "after": ["v", "a", "W", "U"]
+        },
+        {
+            // copy continuous world eg. links
+            "before": ["<leader>", "l"],
+            "after": ["y", "i", "W"]
+        },
+        {
+            // append "," to the end then create a new line
+            "before": ["<leader>", ","],
+            "after": ["A", ",", "Esc", "o", "Esc", "S"]
+        },
+        {
+            // break line
+            "before": ["<leader>", "n"],
+            "after": ["d", "w", "D", "o", "l", "p"]
+        },
+        {
+            // insert "<>"
+            "before": ["<leader>", "j"],
+            "after": ["i", "<", ">", "Esc", "i"]
+        },
+        {
+            // insert " >> " at the end
+            "before": ["<leader>", "r"],
+            "after": ["A", " ", ">", ">", " "]
+        },
+        {
+            // insert " // " at the end
+            "before": ["<leader>", "c"],
+            "after": ["A", " ", "/", "/", " "]
+        },
+        {
+            // delete line to register _
+            "before": ["<leader>", "d"],
+            "after": ["\"", "_", "d", "d"]
+        },
+        {
+            // delete to register _
+            "before": ["<leader>", "x"],
+            "after": ["\"", "_", "x"]
+        },
+        {
+            "before": ["<C-n>"],
+            "commands": [""]
+        },
+        {
+            // create two new lines below
+            "before": ["<leader>", "o"],
+            "after": ["o", "Esc", "o"]
+        },
+        {
+            // create two new lines above
+            "before": ["<leader>", "O"],
+            "after": ["O", "Esc", "O"]
+        },
+        {
+            // create two new lines bellow then "---"
+            "before": ["<leader>", "-"],
+            "after": ["o", "Esc", "o", "-", "-", "-", "Esc", "o", "Esc"]
+        },
+        {
+            // preview Definition Aside
+            "before": ["g", "h"],
+            "commands": ["editor.action.showHover"]
+        },
+        {
+            // hover Definition Aside
+            "before": ["g", "r"],
+            "commands": ["editor.action.peekDefinition"]
+        },
+        {
+            // stay and reveal Definition Aside
+            "before": ["g", "S"],
+            "commands": [
+                "editor.action.revealDefinitionAside",
+                "workbench.action.focusPreviousGroup"
+            ]
+        },
+        {
+            // reveal Definition Aside
+            "before": ["g", "s"],
+            "commands": ["editor.action.revealDefinitionAside"]
+        },
+        {
+            // line break at cursor
+            "before": ["<leader>", "k"],
+            "commands": [
+                "deleteWordStartRight",
+                "lineBreakInsert",
+                "cursorRight"
+            ]
+        },
+        {
+            // select line starting from first none white spece
+            "before": ["<leader>", "v"],
+            "after": ["^", "v", "$", "h"]
+        },
+        {
+            // copy file name
+            "before": ["<leader>", "f"],
+            "commands": ["copy-file-name.copyFileName"]
+        },
+        {
+            "before": ["m", "a"],
+            "commands": ["numberedBookmarks.toggleBookmark1"]
+        },
+        {
+            "key": "' a",
+            "command": "numberedBookmarks.jumpToBookmark1",
+            "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+        },
+        {
+            "before": ["]", "d"],
+            "commands": ["editor.action.marker.nextInFiles"],
+            "silent": true
+        },
+        {
+            "before": ["[", "d"],
+            "commands": ["editor.action.marker.prevInFiles"],
+            "silent": true
+        }
+        // {
+        //   "before": ["<leader>", "w", "x"],
+        //   "commands": ["deleteFile"]
+        // },
+        // {
+        //   "before": ["<leader>", "e"],
+        //   "commands": ["workbench.action.toggleSidebarVisibility"]
+        // },
+        // {
+        //   "before": ["<leader>", "f"],
+        //   "commands": ["revealInExplorer"]
+        // },
+        // {
+        //   "before": ["<leader>", "r", "e"],
+        //   "commands": ["editor.action.rename"]
+        // },
+        // {
+        //   "before": ["<leader>", "r", "f"],
+        //   "commands": ["fileutils.renameFile"]
+        // },
+        // {
+        //   "before": ["<leader>", "o", "g"],
+        //   "commands": ["workbench.action.showAllSymbols"]
+        // },
+        // {
+        //   "before": ["<leader>", "o", "o"],
+        //   "commands": ["workbench.action.showEditorsInActiveGroup"]
+        // },
+        // {
+        //   "before": ["leader", "o", "p"],
+        //   "commands": ["workbench.action.quickOpen"]
+        // },
+    ],
+
+    //
+    // Custom keybindings for visual
+    //
+
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["leader", "c"],
+            "commands": ["editor.action.commentLine", "extension.vim_escape"]
+        }
+    ],
+
+    // END OF VIM CONFIGURATION
+    // (...)
+
+    // install multi-command plugin to be able to use it with keybindings
+    "multiCommand.commands": [
+        {
+            "command": "multiCommand.toggleMaximizedPanelAndFocusTerminal",
+            "sequence": [
+                "workbench.action.toggleMaximizedPanel",
+                "workbench.action.terminal.focus"
+            ]
+        }
+    ],
+    "scm.defaultViewMode": "tree",
+    "FSharp.suggestGitignore": false,
+    "dart.flutterSdkPath": "C:\\Users\\kauder\\Documents\\installer\\Github\\playground\\flutter\\flutter",
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+    "telemetry.telemetryLevel": "off",
+    "[ocaml]": {
+        "editor.defaultFormatter": "ocamllabs.ocaml-platform"
+    },
+    "typescript.preferGoToSourceDefinition": true,
+    "editor.indentSize": "tabSize",
+    "editor.lineNumbers": "relative",
+    "vim.smartRelativeLine": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "files.associations": {
+        "*.ahk": "ahk",
+        "*.everse": "python",
+        "*.verse": "verse",
+        "*.bin": "plaintext"
+    },
+    "[elm]": {
+        "editor.defaultFormatter": "elmTooling.elm-ls-vscode"
+    },
+    "[verse]": {
+        "editor.insertSpaces": true,
+        "prettier.useTabs": false,
+        "editor.indentSize": 4,
+        "editor.defaultFormatter": "epicgames.verse"
+    },
+    // verse language server too slow
+    "[python]": {
+        "editor.insertSpaces": true,
+        "prettier.useTabs": false,
+        "editor.indentSize": 4
+        // "editor.defaultFormatter": "epicgames.verse"
+    },
+    "editor.acceptSuggestionOnEnter": "smart",
+    "markdown.preview.openMarkdownLinks": "inEditor",
+    "editor.defaultColorDecorators": "auto",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "diffEditor.maxComputationTime": 0,
+    "urc-vscode.enabled": false,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "c:\\Users\\k\\AppData\\Local\\Programs\\Microsoft VS Code\\.vscodevimrc",
+    "editor.smoothScrolling": true,
+    "terminal.integrated.smoothScrolling": true,
+    "editor.cursorBlinking": "solid",
+    "editor.wordWrap": "on",
+    "files.autoSaveDelay": 500,
+    "workbench.editorAssociations": {
+        "{git,gitlens}:/**/*.{md,csv,svg}": "default"
+    },
+    "editor.minimap.size": "fill",
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.showSlider": "always",
+    "[nim]": {
+        "editor.defaultFormatter": "nimsaem.nimvscode",
+        "editor.insertSpaces": true,
+        "prettier.useTabs": false,
+        "editor.indentSize": 4
+    },
+    "nim.nimprettyIndent": 4,
+    "nim.nimprettyMaxLineLen": 120,
+    "foam.logging.level": "off",
+    "editor.autoClosingOvertype": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.autoClosingQuotes": "never",
+    "search.searchEditor.defaultNumberOfContextLines": 3,
+    "search.showLineNumbers": true,
+    "workbench.editor.revealIfOpen": true,
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "javascript.preferGoToSourceDefinition": true,
+    "editor.gotoLocation.multipleTypeDefinitions": "gotoAndPeek",
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    "diffEditor.renderSideBySide": true,
+    "explorer.confirmPasteNative": false,
+    "window.openFilesInNewWindow": "default",
+    "editor.renderWhitespace": "none",
+    "zig.zls.enabled": "on",
+    "zig.path": "c:\\Users\\kauder\\AppData\\Roaming\\Code\\User\\globalStorage\\ziglang.vscode-zig\\zig_install\\zig.exe",
+    "zig.zls.path": "c:\\Users\\kauder\\AppData\\Roaming\\Code\\User\\globalStorage\\ziglang.vscode-zig\\zls_install\\zls.exe",
+	"update.mode": "none",
+	"[odin]": {
+		"editor.defaultFormatter": "DanielGavin.ols"
+	},
+	"chat.commandCenter.enabled": false,
+	// wow https://github.com/microsoft/vscode-cpptools/issues/9876
+	// https://github.com/microsoft/vscode/issues/141654
+	"debug.onTaskErrors": "abort",
+	"workbench.colorTheme": "Palenight Operator",
+	"lua-local.interpreter": "C:\\Program Files (x86)\\Lua\\5.1\\lua.exe",
+	"json.format.enable": false
+}
