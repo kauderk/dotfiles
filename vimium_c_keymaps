@@ -1,0 +1,61 @@
+" create new line?
+"map <a-k:i> editText run=["exec","insertText","\n"]
+
+map <a-p> visitPreviousTab
+map <a-p:i> visitPreviousTab
+
+" up left down right
+"map i scrollPageUp
+"map j scrollLeft
+"map k scrollPageDown
+"map l scrollRight
+
+
+" tabs next previous
+"unmap K
+"unmap J
+map <a-h> previousTab
+map <a-l> nextTab
+
+unmap d
+unmap G
+map GG scrollToBottom
+
+unmap <c-e>
+unmap <c-y>
+
+unmap r
+
+unmap gt
+unmap gT
+
+map <a-f> LinkHints.activateOpenInNewTab
+map F LinkHints.activateOpenInNewForegroundTab
+map <a-s-f> LinkHints.activateWithQueue
+
+" close tabs left right
+map wl closeTabsOnRight $count=1
+map wh closeTabsOnLeft $count=-1
+map Wh closeTabsOnLeft
+map Wl closeTabsOnRight
+map WW closeOtherTabs
+
+" move tabs
+map <a-s-l> moveTabRight
+map <a-s-h> moveTabLeft
+
+" move up down
+map <a-k> goForward
+map <a-j> goBack
+
+" enter insert mode
+map i focusInput
+map I switchFocus
+map <c-i> enterInsertMode
+
+
+" mapKey <a-y:i> <enter>
+" map <c-k:i> runKey expect="textarea:-j1,select:-j2,gs:au+-au" keys="-jf"
+" mapKey <k:i> <enter>
+" map <y:i> editText run="replace,$shello"
+" map <c-b:i> editText run="replace,_$s_<enter>"
