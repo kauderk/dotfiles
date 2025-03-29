@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "3/29/2025, 5:00:21 AM",
-	"time": 1743242421928,
+	"@time": "3/29/2025, 5:19:48 AM",
+	"time": 1743243588985,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "win",
@@ -63,22 +63,6 @@
 		"map Wh closeTabsOnLeft",
 		"map Wl closeTabsOnRight",
 		"map WW closeOtherTabs",
-		"",
-		"\" move tab left/right",
-		"\" map <c-f15> moveTabLeft",
-		"\" map <c-f18> moveTabRight",
-		"",
-		"\" go to previous/next tab",
-		"\" map <f15> previousTab",
-		"\" map <f18> nextTab",
-		"",
-		"\" navigate backward/forward tab history ; (built-in) uncomment if not",
-		"\" map <a-left> goBack",
-		"\" map <a-right> goForward",
-		"",
-		"\" home -> tabs | page -> grups",
-		"\" F1*",
-		"\" c-F1*",
 		""
 	],
 	"searchEngines": [
