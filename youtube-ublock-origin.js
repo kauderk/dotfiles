@@ -1,6 +1,7 @@
 youtube-ublock-origin.js text/javascript
 (function () {
     'use strict'
+    console.log('youtube-ublock-origin.js')
  
     if (is_index_page()) { return }
     function is_index_page() {
