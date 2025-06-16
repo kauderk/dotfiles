@@ -939,6 +939,7 @@
         "when": "inReferenceSearchEditor || referenceSearchVisible",
         "title": "my goToNextReference"
     },
+    // End F4
     {
         "key": "ctrl+shift+p",
         "command": "-workbench.action.showCommands"
