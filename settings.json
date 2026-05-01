@@ -27,136 +27,47 @@
     //     { "before": [":"], "commands": ["vim.showQuickpickCmdLine"] },
     // ],
     "vim.visualModeKeyBindingsNonRecursive": [
-      {
-          "before": ["j"],
-          "after": ["g", "j"]
-      },
-      {
-          "before": ["k"],
-          "after": ["g", "k"]
-      }
+        { "before": ["j"], "after": ["g", "j"] }, 
+        { "before": ["k"], "after": ["g", "k"] },
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["j"], "after": ["g", "j"] }, 
+        { "before": ["k"], "after": ["g", "k"] },
+
         {
-            "before": ["j"],
-            "after": ["g", "j"]
-        },
-        {
-            "before": ["k"],
-            "after": ["g", "k"]
-        },
-        {
-            "before": [
-                "<C-w>",
-                "_"
-            ],
+            "before": [ "<C-w>", "_" ],
             "after": [],
             "commands": [
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewHeight",
-                    "args": []
-                }
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
+                { "command": "workbench.action.increaseViewHeight", "args": [] },
             ]
         },
         {
-            "before": [
-                "<C-w>",
-                "|"
-            ],
+            "before": [ "<C-w>", "|" ],
             "after": [],
             "commands": [
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.increaseViewWidth",
-                    "args": []
-                }
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
+                { "command": "workbench.action.increaseViewWidth", "args": [] },
             ]
         }
     ],
@@ -195,7 +106,7 @@
     ],
     "editor.foldingStrategy": "indentation",
     // "vim.smartRelativeLine": true,
-    "vim.foldfix": true,
+    // "vim.foldfix": true,
     "editor.peekWidgetDefaultFocus": "editor",
     "git.openRepositoryInParentFolders": "always",
     "debug.inlineValues": "on",
@@ -243,5 +154,76 @@
     "workbench.tree.enableStickyScroll": false,
     "workbench.colorTheme": "Dark Modern",
     "scm.defaultViewMode": "tree",
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
     // "diffEditor.maxComputationTime": 0,
+    // "editor.find.autoFindInSelection": "multiline",
+    "terminal.integrated.initialHint": false,
+    "chat.tools.urls.autoApprove": {
+        "https://code.visualstudio.com": true,
+        "https://github.com/microsoft/vscode/wiki/*": true,
+        "https://github.com": true,
+        "https://vitejs.dev": true,
+        "https://vite.dev/guide/hmr.html": true,
+        "https://vite.dev/guide": true,
+        "https://vite.dev": true,
+        "https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src/handlehotupdate.ts": true,
+        "https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte/src": true,
+        "https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages/vite-plugin-svelte": true,
+        "https://github.com/sveltejs/vite-plugin-svelte/blob/main/packages": true,
+        "https://github.com/sveltejs/vite-plugin-svelte/blob/main": true,
+        "https://github.com/sveltejs/vite-plugin-svelte/blob": true,
+        "https://github.com/sveltejs/vite-plugin-svelte": true,
+        "https://github.com/sveltejs": true,
+        "https://github.com/marko-js/marko/tree/main/packages/vite-plugin": true,
+        "https://github.com/marko-js/marko/tree/main/packages": true,
+        "https://github.com/marko-js/marko/tree/main": true,
+        "https://github.com/marko-js/marko/tree": true,
+        "https://github.com/marko-js/marko": true,
+        "https://github.com/marko-js": true,
+        "https://svelte.dev/docs/svelte-hmr": true,
+        "https://svelte.dev/docs": true,
+        "https://svelte.dev": true,
+        "https://markojs.com/docs": true,
+        "https://markojs.com": true,
+        "https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte/main/packages/vite-plugin-svelte/src/handleHotUpdate.ts": true,
+        "https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte/main/packages/vite-plugin-svelte/src": true,
+        "https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte/main/packages/vite-plugin-svelte": true,
+        "https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte/main/packages": true,
+        "https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte/main": true,
+        "https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte": true,
+        "https://raw.githubusercontent.com/sveltejs": true,
+        "https://raw.githubusercontent.com": true,
+        "https://*.githubusercontent.com": true,
+        "https://raw.githubusercontent.com/vitejs/vite/main/packages/vite/src/client/client.ts": true,
+        "https://raw.githubusercontent.com/vitejs/vite/main/packages/vite/src/client": true,
+        "https://raw.githubusercontent.com/vitejs/vite/main/packages/vite/src": true,
+        "https://raw.githubusercontent.com/vitejs/vite/main/packages/vite": true,
+        "https://raw.githubusercontent.com/vitejs/vite/main/packages": true,
+        "https://raw.githubusercontent.com/vitejs/vite/main": true,
+        "https://raw.githubusercontent.com/vitejs/vite": true,
+        "https://raw.githubusercontent.com/vitejs": true,
+        "https://raw.githubusercontent.com/crxjs/chrome-extension-tools/main/packages/vite-plugin/src/hmr.ts": true,
+        "https://raw.githubusercontent.com/crxjs/chrome-extension-tools/main/packages/vite-plugin/src": true,
+        "https://raw.githubusercontent.com/crxjs/chrome-extension-tools/main/packages/vite-plugin": true,
+        "https://raw.githubusercontent.com/crxjs/chrome-extension-tools/main/packages": true,
+        "https://raw.githubusercontent.com/crxjs/chrome-extension-tools/main": true,
+        "https://raw.githubusercontent.com/crxjs/chrome-extension-tools": true,
+        "https://raw.githubusercontent.com/crxjs": true
+    },
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.https": {
+        "enable": true,
+        "passphrase": "changeit",
+        "cert": "C:\\pc\\code\\tools\\server_localhost_https\\127.0.0.1.pem",
+        "key": "C:\\pc\\code\\tools\\server_localhost_https\\127.0.0.1-key.pem"
+    },
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.ChromeDebuggingAttachment": true,
+    "js/ts.updateImportsOnFileMove.enabled": "always",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
 }

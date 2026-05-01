@@ -30,6 +30,21 @@
         { "key": "f8 u",   "command": "workbench.action.editor.previousChange",        "when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
         { "key": "f8 i",   "command": "workbench.action.compareEditor.nextChange",     "when": "textCompareEditorVisible" },
         { "key": "f8 i",   "command": "workbench.action.editor.nextChange",            "when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
+    // jump to errors | hjkl alike
+    { "command": "runCommands", "key": "f8 ,", "when": "editorFocus", "args": { "commands": [
+        "editor.action.marker.prev",
+        // "extension.vim_escape",
+    ]}},
+    { "command": "runCommands", "key": "f8 m", "when": "editorFocus", "args": { "commands": [
+        "editor.action.marker.next",
+        // "extension.vim_escape",
+    ]}},
+    // { "key": "f8 m", "command": "editor.action.marker.next",  "when": "editorFocus" },
+            { "key": "alt+f8",       "command": "-editor.action.marker.next", "when": "editorFocus" },
+            { "key": "shift+alt+f8", "command": "-editor.action.marker.prev", "when": "editorFocus" },
+
+
+
     // focus toggle terminal
     { "key": "f8 ;", "command": "workbench.action.terminal.toggleTerminal", "when": "terminal.active" },
     // end: /pc/ahk/keyboard.ahk > F13 & ...::tap_key()
@@ -122,10 +137,59 @@
     { "key": "shift+alt+h", "command": "-editor.showCallHierarchy", "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor" },
     // { "key": "shift+alt+h", "command": "workbench.action.focusPreviousGroup", "when": "!editorHasCallHierarchyProvider && !typeHierarchyVisible && !callHierarchyVisible" },
 
+    // vim: allow to move with multiple cursor???
+    // { "key": "j", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible && editorHasMultipleSelections", "args": {
+    //     "after": ["g", "j"]
+    // }},
+    // { "key": "k", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible && editorHasMultipleSelections", "args": {
+    //     "after": ["g", "k"]
+    // }},
+    // { "key": "j", "command": "cursorDown", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible" },
+    // { "key": "k", "command": "cursorUp", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible" },
+
+
     { "key": "shift+alt+h", "command": "workbench.action.focusLeftGroup" },
     { "key": "ctrl+k ctrl+left", "command": "-workbench.action.focusLeftGroup" },
 
     { "key": "shift+alt+l", "command": "workbench.action.focusRightGroup" },
-    { "key": "ctrl+k ctrl+right", "command": "-workbench.action.focusRightGroup" },
+    {
+        "key": "ctrl+k ctrl+right",
+        "command": "-workbench.action.focusRightGroup"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "workbench.action.toggleMaximizeEditorGroup",
+        "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups"
+    },
+    {
+        "key": "ctrl+k ctrl+m",
+        "command": "-workbench.action.toggleMaximizeEditorGroup",
+        "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "-workbench.actions.view.problems",
+        "when": "workbench.panel.markers.view.active"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "panelFocus"
+    },
+    {
+        "key": "f8 '",
+        "command": "workbench.debug.action.toggleRepl",
+        "when": "workbench.panel.repl.view.active"
+    },
+    {
+        "key": "ctrl+shift+y",
+        "command": "-workbench.debug.action.toggleRepl",
+        "when": "workbench.panel.repl.view.active"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.debug.panel.action.clearReplAction",
+        "when": "panelFocus"
+    },
     // end: vscode customizations
 ]
