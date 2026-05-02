@@ -3,36 +3,18 @@
     "explorer.confirmPasteNative": false,
     "diffEditor.renderSideBySide": true,
     "diffEditor.useInlineViewWhenSpaceIsLimited": false,
-    "vim.vimrc.enable": true,
-    "vim.vimrc.path": "c:\\Users\\user\\.vscodevimrc",
-    "explorer.confirmDelete": false,
-    "vim.useSystemClipboard": true, // @todo make Rubymaniac.vscode-paste-and-indent work with vim
-    "vim.startInInsertMode": false,
-    "vim.handleKeys": {
-        "<C-d>": true,
-        "<C-c>": false,
-        "<C-v>": false,
-        "<C-w>": true,
-        "<C-n>": true,
-        "<C-s>": false,
-        "<C-z>": false,
-        "<C-i>": true,
-        "<C-o>": true,
-        "<C-e>": true,
-    },
-    // "vim.normalModeKeyBindings": [
-    //     { "before": [":"], "commands": ["vim.showQuickpickCmdLine"] },
-    // ],
     // "vim.visualModeKeyBindings": [
     //     { "before": [":"], "commands": ["vim.showQuickpickCmdLine"] },
     // ],
     "vim.visualModeKeyBindingsNonRecursive": [
-        { "before": ["j"], "after": ["g", "j"] }, 
-        { "before": ["k"], "after": ["g", "k"] },
+        // { "before": ["j"], "after": ["<down>"] }, 
+        // { "before": ["k"], "after": ["<up>"] } ,
+    ],
+    "vim.normalModeKeyBindings": [
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
-        { "before": ["j"], "after": ["g", "j"] }, 
-        { "before": ["k"], "after": ["g", "k"] },
+        // { "before": ["j"], "after": ["<down>"] }, 
+        // { "before": ["k"], "after": ["<up>"] },
 
         {
             "before": [ "<C-w>", "_" ],
@@ -75,7 +57,7 @@
         "file:///C:/pc/code/dotfiles/vscode_custom_styles.css"
     ],
     "explorer.confirmDragAndDrop": false,
-    "editor.cursorSurroundingLines": 0,
+    "editor.cursorSurroundingLines": 100,
     "git.enableSmartCommit": true,
     "workbench.sideBar.location": "right",
     "security.workspace.trust.untrustedFiles": "open",

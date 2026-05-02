@@ -6,13 +6,12 @@
     { "key": "ctrl+shift+v", "command": "editor.action.clipboardPasteAction", "when": "editorTextFocus && !editorReadonly" },
     // end: extension shortcuts
 
-
     // begin: /pc/ahk/keyboard.ahk > F13 & ...::tap_key()
     { "key": "f8",   "command": "-{editor.action.marker.nextInFiles", "when": "editorFocus" },
     // multicursor on word/match under cursor
     { "key": "f8 3", "command": "editor.action.addSelectionToPreviousFindMatch" },
-    { "key": "f8 0", "command": "editor.action.addSelectionToNextFindMatch" },
-    { "key": "ctrl+f8 ctrl+0", "command": "editor.action.selectHighlights" },
+    { "key": "f8 8", "command": "editor.action.addSelectionToNextFindMatch" },
+    { "key": "ctrl+f8 ctrl+8", "command": "editor.action.selectHighlights" },
     // jump and peek source control (git) | hjkl alike
     { "key": "f8 y", "command": "editor.action.dirtydiff.previous", "when": "editorTextFocus && !textCompareEditorActive" },
     { "key": "f8 o", "command": "editor.action.dirtydiff.next",     "when": "editorTextFocus && !textCompareEditorActive" },
@@ -33,11 +32,11 @@
     // jump to errors | hjkl alike
     { "command": "runCommands", "key": "f8 ,", "when": "editorFocus", "args": { "commands": [
         "editor.action.marker.prev",
-        // "extension.vim_escape",
+        // "vscode-neovim.escape",
     ]}},
     { "command": "runCommands", "key": "f8 m", "when": "editorFocus", "args": { "commands": [
         "editor.action.marker.next",
-        // "extension.vim_escape",
+        // "vscode-neovim.escape",
     ]}},
     // { "key": "f8 m", "command": "editor.action.marker.next",  "when": "editorFocus" },
             { "key": "alt+f8",       "command": "-editor.action.marker.next", "when": "editorFocus" },
@@ -47,10 +46,22 @@
 
     // focus toggle terminal
     { "key": "f8 ;", "command": "workbench.action.terminal.toggleTerminal", "when": "terminal.active" },
+    // focus toggle debug console
+    { "key": "f8 '", "command": "workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active" },
+    { "key": "ctrl+shift+y", "command": "-workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active" },
     // end: /pc/ahk/keyboard.ahk > F13 & ...::tap_key()
 
+    // begin: /pc/ahk/keyboard.ahk > d::key_modifier_r()
+    // @note I forgot why I need to put the <F> remappings here and not in `vim.normalModeKeyBindingsNonRecursive`
+    { "key": "f7 f", "command": "vim.remap", "when": "editorTextFocus && vim.mode != 'Insert'", "args": {
+        "after": ["<space>", "<space>", "2", "s"]}},
+    // clear vscode build in keys
+    { "key": "f7", "command": "-editor.action.accessibleDiffViewer.next", "when": "isInDiffEditor" },
+    { "key": "f7", "command": "-chatEditor.action.showAccessibleDiffView", "when": "accessibilityModeEnabled && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified" },
+    { "key": "f7", "command": "-editor.action.wordHighlight.next", "when": "editorTextFocus && hasWordHighlights" },
+    // end: /pc/ahk/keyboard.ahk > F13 & ...::tap_key_r()
 
-    // begin: /pc/ahk/keyboard.ahk > d::d_key_modifier()
+    // begin: /pc/ahk/keyboard.ahk > d::key_modifier_r()
     // debugger customizations
     { "key": "f9",            "command": "-editor.debug.action.toggleBreakpoint",       "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus" },
     { "key": "shift+f9",      "command": "-editor.debug.action.toggleInlineBreakpoint", "when": "editorTextFocus" },
@@ -83,6 +94,15 @@
     { "key": "f9 o", "command": "workbench.debug.action.focusBreakpointsView" },
     // end: /pc/ahk/keyboard.ahk > d::d_key_modifier()
 
+    // @hack vim extension gj gk
+    // { "key": "down", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert'", "args": { "after": ["g", "j"] } },
+    // { "key": "up", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert'", "args": { "after": ["g", "k"] } },
+
+    // @hack to solve https://github.com/VSCodeVim/Vim/issues/1323
+    // i like how multiple cursors behave, and the tradeoff is the vim stack history gets lost...
+    { "key": "j", "command": "cursorMove", "args": { "to": "down", "by": "wrappedLine", "value": 1 }, "when": "editorTextFocus && vim.mode == 'Normal'" },
+    { "key": "k", "command": "cursorMove", "args": { "to": "up", "by": "wrappedLine", "value": 1 }, "when": "editorTextFocus && vim.mode == 'Normal'" },
+
 
     // begin: vscode customizations
     // find search inside editor
@@ -94,10 +114,10 @@
         "extension.changeCase.snake",
         // "extension.changeCase.pascal",
         // "workbench.action.toggleMultiCursorModifier",
-        "extension.vim_escape",
-        "extension.vim_escape",
-        "extension.vim_escape",
-        // "extension.vim_escape",
+        "vscode-neovim.escape",
+        "vscode-neovim.escape",
+        "vscode-neovim.escape",
+        // "vscode-neovim.escape",
         "cancelSelection", 
         // "removeSecondaryCursors",
     ] } },
@@ -110,26 +130,12 @@
     { "key": "F3",       "title": "my Go to Next Reference",                    "command": "runCommands", "args": { "commands": [ "workbench.action.focusSecondEditorGroup", "references-view.next" ]},                    "when": "reference-list.hasResult && references-view.canNavigate", }, 
     { "key": "F4",       "title": "my Search: Focus Next Search Result",        "command": "runCommands", "args": { "commands": [ "workbench.action.focusSecondEditorGroup", "search.action.focusNextSearchResult"  ]},    "when": "hasSearchResult || inSearchEditor", }, 
     { "key": "shift+F4", "title": "my Search: Focus Previous Search Result",    "command": "runCommands", "args": { "commands": [ "workbench.action.focusSecondEditorGroup", "search.action.focusPreviousSearchResult" ]}, "when": "hasSearchResult || inSearchEditor", }, 
-    {
-        "key": "F4",
-        "title": "my goToNextReference",
-        "command": "runCommands",
-        "args": {
-            "commands": [
-                "workbench.action.focusSecondEditorGroup",
-                "goToNextReference"
-            ]
-        },
-        "when": "inReferenceSearchEditor || referenceSearchVisible",
-    },
-    {
-        "key": "ctrl+g ctrl+s",
-        "command": "git.unstageAll"
-    },
-    {
-        "key": "shift+alt+l",
-        "command": "workbench.action.focusNextGroup"
-    },
+    { "key": "F4", "title": "my goToNextReference", "command": "runCommands", "when": "inReferenceSearchEditor || referenceSearchVisible", "args": { "commands": [
+        "workbench.action.focusSecondEditorGroup",
+        "goToNextReference"
+    ]}},
+    { "key": "ctrl+g ctrl+s", "command": "git.unstageAll" },
+    { "key": "shift+alt+l", "command": "workbench.action.focusNextGroup" },
 
     // to goto left and right editor groups
 
@@ -137,59 +143,25 @@
     { "key": "shift+alt+h", "command": "-editor.showCallHierarchy", "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor" },
     // { "key": "shift+alt+h", "command": "workbench.action.focusPreviousGroup", "when": "!editorHasCallHierarchyProvider && !typeHierarchyVisible && !callHierarchyVisible" },
 
-    // vim: allow to move with multiple cursor???
-    // { "key": "j", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible && editorHasMultipleSelections", "args": {
-    //     "after": ["g", "j"]
-    // }},
-    // { "key": "k", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible && editorHasMultipleSelections", "args": {
-    //     "after": ["g", "k"]
-    // }},
-    // { "key": "j", "command": "cursorDown", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible" },
-    // { "key": "k", "command": "cursorUp", "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !suggestWidgetVisible" },
-
-
     { "key": "shift+alt+h", "command": "workbench.action.focusLeftGroup" },
     { "key": "ctrl+k ctrl+left", "command": "-workbench.action.focusLeftGroup" },
 
     { "key": "shift+alt+l", "command": "workbench.action.focusRightGroup" },
-    {
-        "key": "ctrl+k ctrl+right",
-        "command": "-workbench.action.focusRightGroup"
-    },
-    {
-        "key": "ctrl+shift+m",
-        "command": "workbench.action.toggleMaximizeEditorGroup",
-        "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups"
-    },
-    {
-        "key": "ctrl+k ctrl+m",
-        "command": "-workbench.action.toggleMaximizeEditorGroup",
-        "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups"
-    },
-    {
-        "key": "ctrl+shift+m",
-        "command": "-workbench.actions.view.problems",
-        "when": "workbench.panel.markers.view.active"
-    },
-    {
-        "key": "ctrl+shift+m",
-        "command": "workbench.action.toggleMaximizedPanel",
-        "when": "panelFocus"
-    },
-    {
-        "key": "f8 '",
-        "command": "workbench.debug.action.toggleRepl",
-        "when": "workbench.panel.repl.view.active"
-    },
-    {
-        "key": "ctrl+shift+y",
-        "command": "-workbench.debug.action.toggleRepl",
-        "when": "workbench.panel.repl.view.active"
-    },
+    { "key": "ctrl+k ctrl+right", "command": "-workbench.action.focusRightGroup" },
+
+    { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizeEditorGroup", "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
+    { "key": "ctrl+k ctrl+m", "command": "-workbench.action.toggleMaximizeEditorGroup", "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
+
+    { "key": "ctrl+shift+m", "command": "-workbench.actions.view.problems", "when": "workbench.panel.markers.view.active" },
+
+    { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizedPanel", "when": "panelFocus" },
     {
         "key": "ctrl+l",
         "command": "workbench.debug.panel.action.clearReplAction",
         "when": "panelFocus"
     },
+    { "key": "f7", "command": "-editor.action.accessibleDiffViewer.next", "when": "isInDiffEditor" },
+    { "key": "f7", "command": "-chatEditor.action.showAccessibleDiffView", "when": "accessibilityModeEnabled && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified" },
+    { "key": "f7", "command": "-editor.action.wordHighlight.next", "when": "editorTextFocus && hasWordHighlights" },
     // end: vscode customizations
 ]
