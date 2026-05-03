@@ -9,16 +9,26 @@
     "vim.visualModeKeyBindingsNonRecursive": [
         // { "before": ["j"], "after": ["<down>"] }, 
         // { "before": ["k"], "after": ["<up>"] } ,
+        // {
+        //     "before": ["*"],
+        //     "after": ["y", ":", "l", "e", "t", " ", "@", "/", " ", "=", " ", "e", "s", "c", "a", "p", "e", "(", "@", "0", ",", " ", "'", "\\", "/", ".", "*", "^", "$", "[", "]", "'", ")", "<Enter>", "/", "<Enter>"]
+        // },
+        // {
+        //     "before": ["#"],
+        //     "after": ["y", "?", "<C-r>", "0", "<Enter>"]
+        // }
+        // { "before": ["n"], "after": [] },
+        // { "before": ["N"], "after": [] },
     ],
     "vim.normalModeKeyBindings": [],
     "vim.normalModeKeyBindingsNonRecursive": [
+        // { "before": ["n"], "after": [] },
+        // { "before": ["N"], "after": [] },
+
         // { "before": ["j"], "after": ["<down>"] }, 
         // { "before": ["k"], "after": ["<up>"] },
 
-        {
-            "before": [ "<C-w>", "_" ],
-            "after": [],
-            "commands": [
+        { "before": [ "<C-w>", "_" ], "after": [], "commands": [
                 { "command": "workbench.action.increaseViewHeight", "args": [] },
                 { "command": "workbench.action.increaseViewHeight", "args": [] },
                 { "command": "workbench.action.increaseViewHeight", "args": [] },
@@ -30,13 +40,8 @@
                 { "command": "workbench.action.increaseViewHeight", "args": [] },
                 { "command": "workbench.action.increaseViewHeight", "args": [] },
                 { "command": "workbench.action.increaseViewHeight", "args": [] },
-                { "command": "workbench.action.increaseViewHeight", "args": [] },
-            ]
-        },
-        {
-            "before": [ "<C-w>", "|" ],
-            "after": [],
-            "commands": [
+                { "command": "workbench.action.increaseViewHeight", "args": [] }, ] },
+        { "before": [ "<C-w>", "|" ], "after": [], "commands": [
                 { "command": "workbench.action.increaseViewWidth", "args": [] },
                 { "command": "workbench.action.increaseViewWidth", "args": [] },
                 { "command": "workbench.action.increaseViewWidth", "args": [] },
@@ -48,9 +53,7 @@
                 { "command": "workbench.action.increaseViewWidth", "args": [] },
                 { "command": "workbench.action.increaseViewWidth", "args": [] },
                 { "command": "workbench.action.increaseViewWidth", "args": [] },
-                { "command": "workbench.action.increaseViewWidth", "args": [] },
-            ]
-        }
+                { "command": "workbench.action.increaseViewWidth", "args": [] }, ] }
     ],
     "vscode_custom_css.imports": [
         "file:///C:/pc/code/dotfiles/vscode_custom_styles.css"
@@ -392,146 +395,4 @@
         ] },
       { "key": "z", "name": "Toggle zen mode", "type": "command", "command": "workbench.action.toggleZenMode" }
     ],
-    // "workbench.editor.showTabs": true,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.hovers.currentLine.over": "line",
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    // "python.pythonPath": "/Users/chris/.miniconda/bin/python",
-    "java.semanticHighlighting.enabled": true,
-    // "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/chris/.vscode-oss/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
-    "workbench.list.automaticKeyboardNavigation": false,
-    "oneDarkPro.editorTheme": "onedarkPro",
-    // "python.languageServer": "Microsoft",
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
-    "kite.showWelcomeNotificationOnStartup": false,
-    "python.terminal.activateEnvironment": false,
-    "editor.cursorBlinking": "solid",
-    "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
-    "files.exclude": {
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-    },
-    "terminal.external.osxExec": "iTerm.app",
-    // "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
-    "leetcode.defaultLanguage": "javascript",
-    "leetcode.hint.configWebviewMarkdown": false,
-    "leetcode.hint.commentDescription": false,
-    // "window.zoomLevel": 3,
-    "window.menuBarVisibility": "toggle",
-    "python.dataScience.alwaysTrustNotebooks": true,
-    "python.condaPath": "$HOME/.miniconda/bin/conda",
-    "python.formatting.provider": "black",
-    "python.insidersChannel": "daily",
-    "terminal.integrated.shell.linux": "/bin/zsh",
-    "terminal.external.linuxExec": "/usr/bin/alacritty",
-    "editor.tokenColorCustomizations": {
-        "[One Dark Pro]": {
-            "textMateRules": [
-                {
-                    "scope": [
-                        "support.class.component.open.jsx",
-                        "support.class.component.close.jsx",
-                        "entity.name.function.js"
-                    ],
-                    "settings": {
-                        "foreground": "#61afef"
-                    }
-                },
-                {
-                    "scope": [
-                        "variable.other.constant.object.js",
-                        "punctuation.section.embedded.begin.jsx",
-                        "punctuation.section.embedded.end.jsx"
-                    ],
-                    "settings": {
-                        "foreground": "#abb2bf"
-                    }
-                },
-                {
-                    "scope": [
-                        "punctuation.definition.tag.jsx"
-                    ],
-                    "settings": {
-                        "foreground": "#5c6370"
-                    }
-                },
-                {
-                    "scope": [
-                        "variable.other.readwrite.js",
-                        "variable.other.property.js",
-                        "variable.parameter",
-                        "variable.other.object.js"
-                    ],
-                    "settings": {
-                        "foreground": "#56b6c2"
-                    }
-                },
-                {
-                    "scope": [
-                        "entity.other.attribute-name.jsx"
-                    ],
-                    "settings": {
-                        "foreground": "#e5c07b"
-                    }
-                },
-                {
-                    "scope": [
-                        "keyword.operator.assignment.js",
-                        "keyword.operator.assignment.jsx",
-                        "string.unquoted.js",
-                        "keyword.operator.typeof.js",
-                        "meta.embedded.expression.js",
-                        "constant.other.object.key.js",
-                        "keyword.operator.logical.js"
-                    ],
-                    "settings": {
-                        "foreground": "#c678dd"
-                    }
-                },
-                {
-                    "scope": [
-                        "variable.other.constant.object.js"
-                    ],
-                    "settings": {
-                        "foreground": "#e06c75"
-                    }
-                }
-            ]
-        }
-    },
-    "workbench.colorCustomizations": {
-        "[Default Dark+]": {
-            "statusBar.background": "#2E2E2E",
-            "statusBar.foreground": "#569CD6",
-            "statusBarItem.remoteBackground": "#2E2E2E",
-            "statusBarItem.remoteForeground": "#569CD6",
-            "activityBar.background": "#2E2E2E",
-            "tab.inactiveBackground": "#2E2E2E"
-        },
-        "[One Dark Pro]": {
-            "editor.background": "#1e2127",
-            "terminal.foreground": "#abb2bf",
-            "terminal.ansiBlack": "#1e2127",
-            "terminal.ansiBlue": "#61afef",
-            "terminal.ansiCyan": "#56b6c2",
-            "terminal.ansiGreen": "#98C379",
-            "terminal.ansiMagenta": "#c678dd",
-            "terminal.ansiRed": "#e06c75",
-            "terminal.ansiWhite": "#abb2bf",
-            "terminal.ansiYellow": "#d19a66",
-            "terminal.ansiBrightBlack": "#5c6370",
-            "terminal.ansiBrightBlue": "#61afef",
-            "terminal.ansiBrightCyan": "#56b6c2",
-            "terminal.ansiBrightGreen": "#98c379",
-            "terminal.ansiBrightMagenta": "#c678dd",
-            "terminal.ansiBrightRed": "#e06c75",
-            "terminal.ansiBrightWhite": "#ffffff",
-            "terminal.ansiBrightYellow": "#d19a66",
-        },
-    },
-    "workbench.activityBar.location": "hidden",
 }
