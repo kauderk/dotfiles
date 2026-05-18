@@ -1,68 +1,155 @@
 [
-    // begin: extension shortcuts
+    //
+    // begin: extension_shortcuts
+    //
     // paste and align
     { "key": "ctrl+v",       "command": "pasteAndIndent.action",              "when": "editorTextFocus && !editorReadonly" },
     { "key": "ctrl+v",       "command": "editor.action.clipboardPasteAction", "when": "!editorTextFocus" },
     { "key": "ctrl+shift+v", "command": "editor.action.clipboardPasteAction", "when": "editorTextFocus && !editorReadonly" },
-    // end: extension shortcuts
 
-    // begin: /pc/ahk/keyboard.ahk > F13 & ...::tap_key()
+    { "key": "cmd+s", "command": "searchEditorApplyChanges.apply", "when": "inSearchEditor" },
+    { "key": "alt+t", "command": "workbench.action.search.toggleQueryDetails", "when": "inSearchEditor" },
+
+    //
+    // kdr_vscode_extensions
+    //
+    { "key": "alt+shift+j", "command": "perFileHistory.cursorBack"   , "when": "editorTextFocus" },
+    { "key": "alt+shift+j", "command": "perFileHistory.cursorForward", "when": "editorTextFocus" },
+
+    { "key": "alt+shift+j", "command": "perFileHistory.editBack"     , "when": "editorTextFocus" },
+    { "key": "alt+shift+j", "command": "perFileHistory.editForward"  , "when": "editorTextFocus" },
+
+    // prev next global edits locations
+    { "key": "alt+j", "command": "workbench.action.navigateBackInEditLocations", "when": "editorFocus" },
+    { "key": "alt+k", "command": "workbench.action.navigateForwardInEditLocations", "when": "editorFocus" },
+
+    // prev next global editors
+    { "key": "ctrl+f8 ctrl+j", "command": "workbench.action.openPreviousRecentlyUsedEditor" },
+    { "key": "ctrl+f8 ctrl+k", "command": "workbench.action.openNextRecentlyUsedEditor" },
+
+    //
+    // end: extension_shortcuts
+    //
+
+    //
+    // begin: /pc/ahk/keyboard.ahk2 > F13 & ...::tap_key()
+    //
     { "key": "f8",   "command": "-{editor.action.marker.nextInFiles", "when": "editorFocus" },
+
     // multicursor on word/match under cursor
     { "key": "f8 3", "command": "editor.action.addSelectionToPreviousFindMatch" },
     { "key": "f8 8", "command": "editor.action.addSelectionToNextFindMatch" },
-    { "key": "ctrl+f8 ctrl+8", "command": "editor.action.selectHighlights" },
+    { "key": "ctrl+f8 ctrl+8", "command": "editor.action.selectHighlights" }, // @todo figure out why this doesn't work anymore
+
     // jump and peek source control (git) | hjkl alike
     { "key": "f8 y", "command": "editor.action.dirtydiff.previous", "when": "editorTextFocus && !textCompareEditorActive" },
     { "key": "f8 o", "command": "editor.action.dirtydiff.next",     "when": "editorTextFocus && !textCompareEditorActive" },
     // peek operations on dirty diff (peek widget)
         // @help because these donn't work I created an ahk @hack -> `/pc/ahk/file_pilot.ahk2`
-        // { "key": "ctrl+g ctrl+r", "command": "git.revertChange"  }, // { "key": "ctrl+g ctrl+s", "command": "git.stageChange"   }, // { "key": "ctrl+g ctrl+b", "command": "diffEditor.revert" }, // 
-        // { "key": "f8 p", "command": "ahk.hack.stage_change"  }, // { "key": "f8 [", "command": "ahk.hack.revert_change" }, // { "key": "capslock", "command": "ahk.hack.close_peek" },
+        // { "key": "ctrl+g ctrl+r", "command": "git.revertChange"  }, 
+        // { "key": "ctrl+g ctrl+s", "command": "git.stageChange"   },
+        // { "key": "ctrl+g ctrl+b", "command": "diffEditor.revert" },
+        // { "key": "f8 p", "command": "ahk.hack.stage_change"  }, 
+        // { "key": "f8 [", "command": "ahk.hack.revert_change" }, 
+        // { "key": "capslock", "command": "ahk.hack.close_peek" },
+
     // diff editor
     { "key": "f8 p", "command": "workbench.action.compareEditor.focusOtherSide" },
+
     // jump to open source control (git) | hjkl alike
-    { "key": "f8 u", "command": "workbench.action.editor.previousChange", "when": "textCompareEditorVisible || editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
-    { "key": "f8 i", "command": "workbench.action.editor.nextChange",     "when": "textCompareEditorVisible || editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
+    { "key": "f8 i", "command": "workbench.action.editor.previousChange", "when": "textCompareEditorVisible || editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
+    { "key": "f8 u", "command": "workbench.action.editor.nextChange",     "when": "textCompareEditorVisible || editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
         // split editor textCompareEditorVisible
-        { "key": "f8 u",   "command": "workbench.action.compareEditor.previousChange", "when": "textCompareEditorVisible" },
-        { "key": "f8 u",   "command": "workbench.action.editor.previousChange",        "when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
-        { "key": "f8 i",   "command": "workbench.action.compareEditor.nextChange",     "when": "textCompareEditorVisible" },
-        { "key": "f8 i",   "command": "workbench.action.editor.nextChange",            "when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
+        { "key": "f8 i",   "command": "workbench.action.compareEditor.previousChange", "when": "textCompareEditorVisible" },
+        { "key": "f8 i",   "command": "workbench.action.editor.previousChange",        "when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
+        { "key": "f8 u",   "command": "workbench.action.compareEditor.nextChange",     "when": "textCompareEditorVisible" },
+        { "key": "f8 u",   "command": "workbench.action.editor.nextChange",            "when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'" },
+    
+    { "key": "ctrl+pageup",   "command": "workbench.action.previousEditor", "when": "editorFocus" },
+    { "key": "ctrl+pagedown", "command": "workbench.action.nextEditor",     "when": "editorFocus" },
+
+    //
     // jump to errors | hjkl alike
-    { "command": "runCommands", "key": "f8 ,", "when": "editorFocus", "args": { "commands": [
-        "editor.action.marker.prev",
-        // "vscode-neovim.escape",
-    ]}},
-    { "command": "runCommands", "key": "f8 m", "when": "editorFocus", "args": { "commands": [
-        "editor.action.marker.next",
-        // "vscode-neovim.escape",
-    ]}},
+    //
+    // { "key": "f8 ,", "command": "multiCommand.silentPrevProblem", "when": "editorFocus", },
+    // { "key": "f8 m", "command": "multiCommand.silentNextProblem", "when": "editorFocus", },
+        // @note in the need of af "delay", use extension.multiCommand.execute
+        { "command": "runCommands", "key": "f8 ,",  "args": { "commands": [ // "when": "editorFocus", 
+            "cursorLineStart",
+            "editor.action.marker.prev",
+            // "closeMarkersNavigation",
+            // "multiCommand.silentPrevProblem",
+            { "command": "extension.multiCommand.execute", "args": { "interval": 200,
+                    "sequence": [ "closeMarkersNavigation", "editor.action.showHover", ] } },
+            // "closeMarkersNavigation",
+            // "editor.action.showHover",
+        ]}},
+        { "command": "runCommands", "key": "f8 m", "args": { "commands": [
+            "cursorLineEnd",
+            "editor.action.marker.next",
+            // "closeMarkersNavigation",
+            // "multiCommand.silentNextProblem"
+            { "command": "extension.multiCommand.execute", "args": { "interval": 200,
+                    "sequence": [ "closeMarkersNavigation", "editor.action.showHover", ] } },
+            // "workbench.action.focusActiveEditorGroup",
+            // // { "command": "vim.remap", "args": { "after": ["<Esc>", "W"] } }, 
+            // "editor.action.hideHover",
+            // // "closeMarkersNavigation",
+            // // "editor.action.marker.next",
+            // // "editor.foldAllMarkerRegions",
+            // // "closeMarkersNavigation",
+            // // "extension.vim_escape",
+            // "editor.action.showHover",
+            // // "workbench.action.focusSideBar",
+            // // "workbench.action.focusActiveEditorGroup",
+            // // "editor.action.showDefinitionPreviewHover",
+            // // "editor.action.peekDefinition",
+        ]}},
     // { "key": "f8 m", "command": "editor.action.marker.next",  "when": "editorFocus" },
             { "key": "alt+f8",       "command": "-editor.action.marker.next", "when": "editorFocus" },
             { "key": "shift+alt+f8", "command": "-editor.action.marker.prev", "when": "editorFocus" },
 
-
-
-    // focus toggle terminal
-    { "key": "f8 ;", "command": "workbench.action.terminal.toggleTerminal", "when": "terminal.active" },
+    //
+    // focus terminal
+    //
+    { "key": "f8 ;", "command": "terminal.focus" },
+    { "key": "f8 '", "command": "workbench.debug.action.focusRepl" },
     // focus toggle debug console
-    { "key": "f8 '", "command": "workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active" },
-    { "key": "ctrl+shift+y", "command": "-workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active" },
-    // end: /pc/ahk/keyboard.ahk > F13 & ...::tap_key()
+    // { "key": "f8 ;", "command": "workbench.action.terminal.toggleTerminal", "when": "terminal.active" },
+    // { "key": "f8 '", "command": "workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active" },
+        { "key": "ctrl+shift+y", "command": "-workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active" },
+    // end: /pc/ahk/keyboard.ahk2 > F13 & ...::tap_key()
+        
+    // clear terminal and debug console
+    { "key": "alt+;", "command":  "workbench.action.terminal.clear" },
+    { "key": "alt+'", "command": "runCommands", "when": "editorFocus", "args": { "commands": [ "workbench.debug.panel.action.clearReplAction", "workbench.action.focusActiveEditorGroup"]} },
+    { "key": "shift+escape",  "command": "workbench.action.focusActiveEditorGroup", "when": "!editorFocus" },
+    { "key": "ctrl+l",       "command": "workbench.debug.panel.action.clearReplAction", "when": "panelFocus" },
 
-    // begin: /pc/ahk/keyboard.ahk > d::key_modifier_r()
+    // move around panels and terminals
+    { "key": "alt+h", "command": "workbench.action.previousPanelView", "when": "panelFocus" },
+    { "key": "alt+l", "command": "workbench.action.nextPanelView",     "when": "panelFocus" },
+        { "key": "alt+h", "command": "runCommands", "when": "auxiliaryBarFocus", "args": { "commands": ["workbench.action.focusActiveEditorGroup", "workbench.action.previousAuxiliaryBarView", "workbench.action.focusAuxiliaryBar" ]} },
+        { "key": "alt+l", "command": "runCommands", "when": "auxiliaryBarFocus", "args": { "commands": ["workbench.action.focusActiveEditorGroup", "workbench.action.nextAuxiliaryBarView", "workbench.action.focusAuxiliaryBar" ]} },
+
+
+    { "key": "alt+j", "command": "workbench.action.terminal.focusNext", "when": "terminalFocus" },
+    { "key": "alt+k", "command": "workbench.action.terminal.focusPrevious", "when": "terminalFocus" },
+
+    //
+    // begin: /pc/ahk/keyboard.ahk2 > d::key_modifier_r()
+    //
     // @note I forgot why I need to put the <F> remappings here and not in `vim.normalModeKeyBindingsNonRecursive`
-    { "key": "f7 f", "command": "vim.remap", "when": "editorTextFocus && vim.mode != 'Insert'", "args": {
+    { "key": "f8 f", "command": "vim.remap", "when": "editorTextFocus && vim.mode != 'Insert'", "args": {
         "after": ["<space>", "<space>", "2", "s"]}},
     // clear vscode build in keys
-    { "key": "f7", "command": "-editor.action.accessibleDiffViewer.next", "when": "isInDiffEditor" },
-    { "key": "f7", "command": "-chatEditor.action.showAccessibleDiffView", "when": "accessibilityModeEnabled && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified" },
+    { "key": "f8", "command": "-editor.action.accessibleDiffViewer.next", "when": "isInDiffEditor" },
+    { "key": "f8", "command": "-chatEditor.action.showAccessibleDiffView", "when": "accessibilityModeEnabled && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified" },
     { "key": "f7", "command": "-editor.action.wordHighlight.next", "when": "editorTextFocus && hasWordHighlights" },
-    // end: /pc/ahk/keyboard.ahk > F13 & ...::tap_key_r()
 
-    // begin: /pc/ahk/keyboard.ahk > d::key_modifier_r()
+    //
     // debugger customizations
+    //
     { "key": "f9",            "command": "-editor.debug.action.toggleBreakpoint",       "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus" },
     { "key": "shift+f9",      "command": "-editor.debug.action.toggleInlineBreakpoint", "when": "editorTextFocus" },
     { "key": "shift+f9",      "command": "-settings.action.showContextMenu",            "when": "inSettingsEditor" },
@@ -92,21 +179,39 @@
     { "key": "f9 u", "command": "editor.debug.action.toggleInlineBreakpoint", "when": "editorTextFocus" },
     { "key": "f9 i", "command": "editor.debug.action.toggleInlineBreakpoint", "when": "editorTextFocus" }, // @feedabck what to put here?
     { "key": "f9 o", "command": "workbench.debug.action.focusBreakpointsView" },
-    // end: /pc/ahk/keyboard.ahk > d::d_key_modifier()
 
-    // @hack vim extension gj gk
-    // { "key": "down", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert'", "args": { "after": ["g", "j"] } },
-    // { "key": "up", "command": "vim.remap", "when": "editorTextFocus && vim.active && vim.mode != 'Insert'", "args": { "after": ["g", "k"] } },
-
+    //
     // @hack to solve https://github.com/VSCodeVim/Vim/issues/1323
+    //
     // i like how multiple cursors behave, and the tradeoff is the vim stack history gets lost...
     { "key": "j", "command": "cursorMove", "args": { "to": "down", "by": "wrappedLine", "value": 1 }, "when": "editorTextFocus && vim.mode == 'Normal'" },
     { "key": "k", "command": "cursorMove", "args": { "to": "up", "by": "wrappedLine", "value": 1 }, "when": "editorTextFocus && vim.mode == 'Normal'" },
 
+    // move around hover toolitp
+    // @todo search inside it
+    { "key": "h",       "command": "editor.action.scrollLeftHover",  "when": "editorHoverFocused" },
+    { "key": "j",       "command": "editor.action.scrollDownHover",  "when": "editorHoverFocused" },
+    { "key": "k",       "command": "editor.action.scrollUpHover",    "when": "editorHoverFocused" },
+    { "key": "l",       "command": "editor.action.scrollRightHover", "when": "editorHoverFocused" },
+    // { "key": "g",     "command": "vim.remap", "when": "vim.active",  "args": { "before": ["g"], "after": ["g"] }  },
+    { "key": "g g",     "command": "editor.action.goToTopHover",     "when": "editorHoverFocused" },
+    { "key": "shift+g", "command": "editor.action.goToBottomHover",  "when": "editorHoverFocused" },
+    { "key": "ctrl+u",  "command": "editor.action.pageUpHover",      "when": "editorHoverFocused" },
+    { "key": "ctrl+d",  "command": "editor.action.pageDownHover",    "when": "editorHoverFocused" },
+    // { "key": "g h",     "command": "runCommands",                    "when": "editorFocus && vim.mode != 'Insert'", "args": { "commands": [ "editor.action.showDefinitionPreviewHover" ]}},
 
+    // emulate vimium-c
+    { "key": "ctrl+e", "command": "editorScroll", "when": "editorTextFocus && vim.active && vim.mode == 'Normal'", "args": {
+            "to": "down", "by": "line", "value": 3, "revealCursor": false } },
+    { "key": "ctrl+y", "command": "editorScroll", "when": "editorTextFocus && vim.active && vim.mode == 'Normal'", "args": {
+            "to": "up"  , "by": "line", "value": 3, "revealCursor": false } },
+    { "key": "enter", "command": "cursorMove", "when": "editorTextFocus && vim.active && vim.mode == 'Normal'", "args": { "to": "viewPortCenter" } },
+
+
+
+    //
     // begin: find widget vscode customizations
-    // find search inside editor
-    // { "key": "alt+f",  "command": "actions.find", "when": "findWidgetVisible && editorFocus && editorIsOpen && !editor.hasSelection" },
+    //
 
     // focus on findWidget while preserving it's state
     { "key": "alt+f",  "command": "runCommands", "when": "findWidgetVisible && editorFocus", "args": { "commands": [
@@ -115,129 +220,196 @@
     { "key": "alt+f", "command": "runCommands", "when": "!findWidgetVisible && editorFocus && editorIsOpen && editor.hasSelection && editorHasSelection", "args": {
         "commands": ["editor.action.startFindReplaceAction", "toggleFindInSelection",
         { "command": "vim.remap", "args": { "after": ["o", "<Esc>"] } }, 
-        // "workbench.action.focusActiveEditorGroup" 
         ] } },
 
+        
+    // "restore" original functionality
+    { "key": "alt+s", "command": "runCommands", "when": "editorFocus && editorIsOpen", "args": {"commands": [
+       "closeFindWidget", "actions.find"
+    ]} },
+    { "key": "alt+f", "command": "actions.find", "when": "!findWidgetVisible && editorFocus && editorIsOpen && !editor.hasSelection && !editorHasSelection" },
+    { "key": "alt+shift+f", "command": "actions.find", "when": "!findWidgetVisible && editorFocus && editorIsOpen && editor.hasSelection && editorHasSelection" },
+
     // @hack undo & redo editor changes from the findWidget
-    { "key": "ctrl+z",  "command": "runCommands", "when": "findWidgetFocused && editorIsOpen", "args": { "commands": [
+    { "key": "ctrl+u",        "command": "runCommands", "when": "findWidgetFocused && editorIsOpen", "args": { "commands": [
         "workbench.action.focusActiveEditorGroup",
         "undo",
         "cursorLineStart", "editor.action.startFindReplaceAction", "cursorUndo", ] } },
-    { "key": "ctrl+shift+z",  "command": "runCommands", "when": "findWidgetFocused && editorIsOpen", "args": { "commands": [
+    { "key": "ctrl+r",  "command": "runCommands", "when": "findWidgetFocused && editorIsOpen", "args": { "commands": [
         "workbench.action.focusActiveEditorGroup",
         "redo",
         "cursorLineStart", "editor.action.startFindReplaceAction", "cursorUndo", ] } },
 
-    { "key": "ctrl+enter",  "command": "editor.action.replaceAll", "when": "findWidgetFocused && editorIsOpen" },
-
-    // { "key": "alt+f",  "command": "runCommands", "when": "findWidgetVisible", "args": { "commands": [
-    //     "actions.find",
-    //     // "widgetNavigation.focusNext",
-
-    //     // "list.focusDown",
-    //     // "list.focusAnyDown",
-    //     // "extension.vim_tab"
-    //     // { "command": "vim.remap", "args": { "after": [""] } }, 
-    // ]} },
-    // { "key": "alt+f",  "command": "editor.action.startFindReplaceAction", "when": "editorFocus || editorIsOpen && editor.hasSelection" },
-    // { "key": "alt+f",  "command": "toggleFindInSelection", "when": "editorFocus || editorIsOpen && editor.hasSelection" },
-    // { "key": "alt+f", "command": "runCommands", "when": "!findWidgetVisible && editorFocus && editorIsOpen && editor.hasSelection && editorHasSelection", "args": {
-    //     "commands": ["editor.action.startFindReplaceAction", "toggleFindInSelection",
-    //     { "command": "vim.remap", "args": { "after": ["o", "<Esc>"] } }, 
-    //     // "extension.vim_escape", 
-    //     // "workbench.action.focusActiveEditorGroup" 
-    //     ] } },
-
-   // { "key": "alt+f",  "command": "toggleFindInSelection", "when": "editorFocus || editorIsOpen && editor.hasSelection" },
-
-    // { "key": "alt+3", "command": "editor.action.nextMatchFindAction" }, // (vim) shift # * // jump highlight vscode
-    // { "key": "alt+8", "command": "editor.action.nextSelectionMatchFindAction" }, // change find selection then jump highlight vscode
-
-    { "key": "alt+3", "command": "editor.action.previousMatchFindAction", "when": "findWidgetFocused" },
-    { "key": "alt+8", "command": "editor.action.nextMatchFindAction", "when": "findWidgetFocused" },
-
-    { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "findWidgetFocused || findInputFocussed" },
-    { "key": "alt+l", "command": "toggleFindInSelection", "when": "findWidgetVisible" },
-
-    // { "key": "alt+8", "command": "editor.action.addSelectionToNextFindMatch" }, // (ahk) LWin # *
-    { "key": "shift+3", "command": "editor.action.moveSelectionToPreviousFindMatch", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert'" },
-    { "key": "shift+8", "command": "editor.action.moveSelectionToNextFindMatch", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert'" },
-
-    { "key": "shift+3", "command": "editor.action.previousSelectionMatchFindAction", "when": "editorTextFocus && findWidgetVisible && vim.mode != 'Insert'" },
-    { "key": "shift+8", "command": "editor.action.nextSelectionMatchFindAction", "when": "editorTextFocus && findWidgetVisible && vim.mode != 'Insert'" },
+    // move around from findWidget to Editor
+    // { "key": "escape",     "command": "workbench.action.focusActiveEditorGroup", "when": "findWidgetFocused || findInputFocussed" },
+    { "key": "escape",     "command": "runCommands", "when": "findWidgetFocused || findInputFocussed", "args": {"commands": ["workbench.action.focusActiveEditorGroup", "extension.vim_escape", "cursorDown", "cursorUp"]} },
+    { "key": "shift+escape",     "command": "runCommands", "when": "findWidgetFocused || findInputFocussed", "args": {"commands": ["workbench.action.focusActiveEditorGroup", "extension.vim_escape", "cursorDown", "cursorUp"]} },
+    // { "key": "shift+escape","command": "closeFindWidget", "when": "findWidgetVisible && editorTextFocus" },
+    { "key": "ctrl+enter", "command": "editor.action.replaceAll", "when": "findWidgetFocused && editorIsOpen" },
+    { "key": "alt+l",      "command": "toggleFindInSelection", "when": "findWidgetVisible" },
+    { "key": "alt+t",      "command": "editor.action.startFindReplaceAction", "when": "findWidgetVisible" },
 
     // @hack if "editorHasSelection" then nap "n" & "N" to restore selection to jump around
-    // @ai_gen To push selection to Vim: Hit y then type /<C-r>0<Enter>. Now your selection is in the Vim stack.
-    // To push Vim to VS Code: Hit Enter on a search match, then use a command like editor.action.selectHighlights.
-    { "key": "n", "command": "runCommands", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert'", "args": { 
+    // now I have two match jump history stacks...
+    { "key": "n", "command": "runCommands", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert' && vim.mode != 'CommandlineInProgress' && vim.mode != 'SearchInProgressMode'", "args": { 
         "commands": [ { "command": "vim.remap", "args": { "after": ["g", "v"] } }, 
             "editor.action.moveSelectionToNextFindMatch" ] }, },
-    { "key": "shift+n", "command": "runCommands", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert'", "args": { 
+    { "key": "shift+n", "command": "runCommands", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert' && vim.mode != 'CommandlineInProgress' && vim.mode != 'SearchInProgressMode'", "args": { 
         "commands": [ { "command": "vim.remap", "args": { "after": ["g", "v"] } }, 
             "editor.action.moveSelectionToPreviousFindMatch" ] },},
     
+    { "key": "n", "command": "runCommands", "when": "findWidgetVisible && editorTextFocus && vim.mode != 'Insert' && vim.mode != 'CommandlineInProgress' && vim.mode != 'SearchInProgressMode'", "args": { 
+        "commands": ["editor.action.nextMatchFindAction", "cursorDown", "cursorUp", "extension.vim_escape"] }, },
+    { "key": "shift+n", "command": "runCommands", "when": "findWidgetVisible && editorTextFocus && vim.mode != 'Insert' && vim.mode != 'CommandlineInProgress' && vim.mode != 'SearchInProgressMode'", "args": { 
+        "commands": ["editor.action.previousMatchFindAction", "cursorDown", "cursorUp", "extension.vim_escape"] },},
 
-    { "key": "n", "command": "runCommands", "when": "findWidgetVisible && editorTextFocus && vim.mode != 'Insert'", "args": { 
-        "commands": ["editor.action.nextMatchFindAction"] }, },
-    { "key": "shift+n", "command": "runCommands", "when": "findWidgetVisible && editorTextFocus && vim.mode != 'Insert'", "args": { 
-        "commands": ["editor.action.previousMatchFindAction"] },},
+    { "key": "alt+n", "command": "vim.remap", "when": "editorFocus && vim.mode != 'Insert'", "args": { "after": ["n"] } },
+    { "key": "alt+shift+n", "command": "vim.remap", "when": "editorFocus && vim.mode != 'Insert'", "args": { "after": ["N"] } },
+
+    // { "key": "g", "command": "runCommands", "when": "editorTextFocus && vim.mode != 'Insert'", "args": { 
+    // "commands": [{ "command": "vim.remap", "args": { "after": ["g"] } }] }, },
+
+    // "preserve" vim's search history...
+    // { "key": "g n", "command": "runCommands", "when": "editorTextFocus && vim.mode != 'Insert'", "args": { 
+    //     "commands": [{ "command": "vim.remap", "args": { "after": ["n"] } }, "extension.vim_escape"] }, },
+    // { "key": "g N", "command": "runCommands", "when": "editorTextFocus && vim.mode != 'Insert'", "args": { 
+    //     "commands": [{ "command": "vim.remap", "args": { "after": ["N"] } }, "extension.vim_escape"] }, },
+    // { "key": "g n", "command": "vim.remap", "when": "editorTextFocus && vim.mode != 'Insert'", "args": { "after": ["n"] }},
+    // { "key": "g N", "command": "vim.remap", "when": "editorTextFocus && vim.mode != 'Insert'", "args": { "after": ["n"] }},
+
+    // alt+n
+    // alt+m for selection jump
+
+    // go to previous/next file
+
+    // { "key": "alt+3", "command": "references-view.prev", "when": "inReferenceSearchEditor" },
+    // { "key": "alt+8", "command": "references-view.next", "when": "inReferenceSearchEditor" },
+
+    // { "key": "alt+3", "command": "goToPreviousReference", "when": "inReferenceSearchEditor" },
+    // { "key": "alt+8", "command": "goToNextReference", "when": "inReferenceSearchEditor" },
+
+    // navigate (F12) `g d` go to definition widget
+    { "key": "alt+3", "command": "runCommands", "args": { "commands": [ "workbench.action.focusActiveEditorGroup", "togglePeekWidgetFocus", "list.focusUp", "togglePeekWidgetFocus", ] }, "when": "referenceSearchVisible" },
+    { "key": "alt+8", "command": "runCommands", "args": { "commands": [ "workbench.action.focusActiveEditorGroup", "togglePeekWidgetFocus", "list.focusDown", "togglePeekWidgetFocus", ] }, "when": "referenceSearchVisible" },
+    // keyboard.ak2 is handling this, it's supposed to be "alt+space" but windows captures it before vscode, to open the window context menu
+    { "key": "alt+f7", "command": "runCommands", "args": { "commands": [ "workbench.action.focusActiveEditorGroup", "togglePeekWidgetFocus", "list.select", "extension.vim_insert", "extension.vim_escape" ] }, "when": "referenceSearchVisible" },
+
+    // # & * to move around matches on findWidget
+    { "key": "shift+3", "command": "editor.action.previousSelectionMatchFindAction", "when": "editorTextFocus && findWidgetVisible && vim.mode != 'Insert'" },
+    { "key": "shift+8", "command": "editor.action.nextSelectionMatchFindAction", "when": "editorTextFocus && findWidgetVisible && vim.mode != 'Insert'" },
+
+    // (ahk) LWin # * | add match selections to multiple cursors
+    { "key": "shift+3", "command": "editor.action.moveSelectionToPreviousFindMatch", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert'" },
+    { "key": "shift+8", "command": "editor.action.moveSelectionToNextFindMatch", "when": "!findWidgetVisible && editorTextFocus && editorHasSelection && vim.mode != 'Insert'" },
+
+    // use alt # & * to move around matches on findWidget
+    { "key": "alt+3", "command": "editor.action.previousMatchFindAction", "when": "findWidgetFocused" },
+    { "key": "alt+8", "command": "editor.action.nextMatchFindAction", "when": "findWidgetFocused" },
+
+    // use alt+shift # & * to add and move around matches on findWidget
+    { "key": "alt+shift+3", "command": "editor.action.addSelectionToPreviousFindMatch", "when": "findWidgetFocused" },
+    { "key": "alt+shift+8", "command": "editor.action.addSelectionToNextFindMatch", "when": "findWidgetFocused" },
     
-
+    //
+    // other
+    //
     { "key": "ctrl+g ctrl+a", "command": "git.stageAll" },
-    // { "key": "shift+ctrl+e", "command": "-workbench.view.explorer" },
+
+
+    { "key": "ctrl+p", "command": "workbench.action.quickOpen" },
+    { "key": "alt+q", "command": "runCommands", "when": "!isInDiffEditor", "args": {"commands": ["git.openChange", { "command": "vim.remap", "args": { "after": ["z", "z"] } } ] } }, 
+    { "key": "alt+q", "command": "runCommands", "when": "isInDiffEditor",  "args": {"commands": ["git.openFile",   { "command": "vim.remap", "args": { "after": ["z", "z"] } } ] } }, 
 
     // select all matches then to snake_case
-    { "command": "runCommands", "key": "f8 9", "args": { "commands": [
-        "editor.action.selectHighlights",
+    { "command": "runCommands", "key": "f8 9", "args": { "commands": [ "editor.action.selectHighlights",
         "extension.changeCase.snake",
-        // "extension.changeCase.pascal",
-        // "workbench.action.toggleMultiCursorModifier",
-        "vscode-neovim.escape",
-        "vscode-neovim.escape",
-        "vscode-neovim.escape",
-        // "vscode-neovim.escape",
-        "cancelSelection", 
-        // "removeSecondaryCursors",
-    ] } },
+        "extension.vim_escape", "extension.vim_escape", "extension.vim_escape", ] } },
 
+    //
     // F4: or next search resulttto open in the last editor
+    //
     { "key": "f4",       "command": "-references-view.next",                    "when": "reference-list.hasResult && references-view.canNavigate"},
     { "key": "f4",       "command": "-search.action.focusNextSearchResult",     "when": "hasSearchResult || inSearchEditor"},
     { "key": "f4",       "command": "-goToNextReference",                       "when": "inReferenceSearchEditor || referenceSearchVisible"},
     { "key": "shift+f4", "command": "-search.action.focusPreviousSearchResult", "when": "inReferenceSearchEditor || referenceSearchVisible"},
+
     { "key": "F3",       "title": "my Go to Next Reference",                    "command": "runCommands", "args": { "commands": [ "workbench.action.focusSecondEditorGroup", "references-view.next" ]},                    "when": "reference-list.hasResult && references-view.canNavigate", }, 
     { "key": "F4",       "title": "my Search: Focus Next Search Result",        "command": "runCommands", "args": { "commands": [ "workbench.action.focusSecondEditorGroup", "search.action.focusNextSearchResult"  ]},    "when": "hasSearchResult || inSearchEditor", }, 
     { "key": "shift+F4", "title": "my Search: Focus Previous Search Result",    "command": "runCommands", "args": { "commands": [ "workbench.action.focusSecondEditorGroup", "search.action.focusPreviousSearchResult" ]}, "when": "hasSearchResult || inSearchEditor", }, 
     { "key": "F4", "title": "my goToNextReference", "command": "runCommands", "when": "inReferenceSearchEditor || referenceSearchVisible", "args": { "commands": [
         "workbench.action.focusSecondEditorGroup",
-        "goToNextReference"
-    ]}},
+        "goToNextReference" ]}},
     { "key": "ctrl+g ctrl+s", "command": "git.unstageAll" },
-    { "key": "shift+alt+l", "command": "workbench.action.focusNextGroup" },
+    { "key": "shift+alt+l",   "command": "workbench.action.focusNextGroup" },
 
+    // F3: git changes navegation
+    // { "key": "f3", "command": "runCommands",       "args": { "commands": [
+    //     "workbench.action.focusSecondEditorGroup",
+    //     "scm.next" ]}},
+    // { "key": "shift+f3", "command": "runCommands", "args": { "commands": [
+    //     "workbench.action.focusSecondEditorGroup",
+    //     "workbench.scm.action.focusPreviousChange" ]}},
+    // { "key": "f6", "command": "runCommands",       "args": { "commands": [
+    //     "workbench.action.focusSecondEditorGroup",
+    //     "workbench.scm.action.focusNextChange" ]}},
+    // { "key": "shift+f6", "command": "runCommands", "args": { "commands": [
+    //     "workbench.action.focusSecondEditorGroup",
+    //     "workbench.scm.action.focusPreviousChange" ]}},
+    //     { "key": "f3", "command": "-findNext", "when": "editorFocus" },
+    //     { "key": "f3", "command": "-editor.action.nextMatchFindAction", "when": "editorFocus" },
+    //     { "key": "f6", "command": "-workbench.action.focusNextPart" },
+
+    // { "key": "f3", "command": "runCommands", "when": "editorTextFocus", "args": { "commands": [
+    //     "workbench.view.scm",
+    //     "list.focusDown",
+    //     "list.select" ] }, },
+    // { "key": "shift+f3", "command": "runCommands", "when": "editorTextFocus", "args": { "commands": [
+    //     "workbench.view.scm",
+    //     "list.focusUp",
+    //     "list.select" ] }, },
+
+    //
     // to goto left and right editor groups
+    //
 
-    { "key": "shift+alt+h", "command": "-references-view.showCallHierarchy", "when": "editorHasCallHierarchyProvider" },
-    { "key": "shift+alt+h", "command": "-editor.showCallHierarchy", "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor" },
-    // { "key": "shift+alt+h", "command": "workbench.action.focusPreviousGroup", "when": "!editorHasCallHierarchyProvider && !typeHierarchyVisible && !callHierarchyVisible" },
-
+    
     { "key": "shift+alt+h", "command": "workbench.action.focusLeftGroup" },
-    { "key": "ctrl+k ctrl+left", "command": "-workbench.action.focusLeftGroup" },
-
     { "key": "shift+alt+l", "command": "workbench.action.focusRightGroup" },
-    { "key": "ctrl+k ctrl+right", "command": "-workbench.action.focusRightGroup" },
+        { "key": "ctrl+k ctrl+right", "command": "-workbench.action.focusRightGroup" },
+        { "key": "shift+alt+h",  "command": "-editor.showCallHierarchy",          "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor" },
+        { "key": "shift+alt+h", "command": "-references-view.showCallHierarchy", "when": "editorHasCallHierarchyProvider" },
+        { "key": "ctrl+k ctrl+left", "command": "-workbench.action.focusLeftGroup" },
 
-    { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizeEditorGroup", "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
-    { "key": "ctrl+k ctrl+m", "command": "-workbench.action.toggleMaximizeEditorGroup", "when": "editorPartMaximizedEditorGroup || editorPartMultipleEditorGroups" },
 
-    { "key": "ctrl+shift+m", "command": "-workbench.actions.view.problems", "when": "workbench.panel.markers.view.active" },
+    { "key": "shift+alt+h", "command": "workbench.action.compareEditor.focusSecondarySide", "when": "isInDiffEditor" },
+    { "key": "shift+alt+l", "command": "workbench.action.compareEditor.focusPrimarySide",   "when": "isInDiffEditor" },
 
+
+    // maximize wiht the same shortcut
     { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizedPanel", "when": "panelFocus" },
-    {
-        "key": "ctrl+l",
-        "command": "workbench.debug.panel.action.clearReplAction",
-        "when": "panelFocus"
-    },
+    { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizedAuxiliaryBar", "when": "auxiliaryBarFocus" },
+    { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizeEditorGroup", "when": "editorFocus && activeEditor" },
+    { "key": "ctrl+shift+m", "command": "workbench.action.moveModalEditorToMain", "when": "editorPartModal" },
+        { "key": "ctrl+shift+m", "command": "-workbench.actions.view.problems",      "when": "workbench.panel.markers.view.active" },
+
+    // { "key": "enter", "command": "runCommands", "when": "focusedView == 'workbench.scm'", "args": { "commands": [
+    //     "list.select", 
+    //     { 
+    //         "command": "workbench.action.toggleMaximizeEditorGroup", 
+    //         "when": "!editorPartMaximizedEditorGroup && !panelMaximized && !auxiliaryBarMaximized && !auxiliaryBarMaximized"
+    //     },
+    //     ] }, },
+
+    // { "key": "enter", "command": "runCommands", "when": "focusedView == 'workbench.scm' && !editorPartMaximizedEditorGroup && !panelMaximized && !auxiliaryBarMaximized && !auxiliaryBarMaximized", "args": { "commands": [
+    //     "list.select", 
+    //     "workbench.action.toggleMaximizeEditorGroup", 
+    //     ] }, },
+
+
+
+    //
+    // begin: /pc/ahk/keyboard.ahk2 > F14 & ...::tap_key_r()
+    //
     { "key": "f7", "command": "-editor.action.accessibleDiffViewer.next", "when": "isInDiffEditor" },
     { "key": "f7", "command": "-chatEditor.action.showAccessibleDiffView", "when": "accessibilityModeEnabled && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified" },
     { "key": "f7", "command": "-editor.action.wordHighlight.next", "when": "editorTextFocus && hasWordHighlights" },
@@ -276,8 +448,10 @@
     { "key": "ctrl+j", "command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
     { "key": "tab",    "command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
 
-    { "key": "ctrl+shift+l", "command": "workbench.action.increaseViewSize" },
-    { "key": "ctrl+shift+h", "command": "workbench.action.decreaseViewSize" },
+    { "key": "ctrl+shift+l", "command": "workbench.action.moveEditorToRightGroup" },
+    { "key": "ctrl+shift+h", "command": "workbench.action.moveEditorToLeftGroup" },
+        // { "key": "ctrl+shift+l", "command": "workbench.action.increaseViewSize" },
+        // { "key": "ctrl+shift+h", "command": "workbench.action.decreaseViewSize" },
     { "key": "ctrl+shift+t", "command": "workbench.action.toggleMaximizedPanel" },
         { "key": "ctrl+shift+t", "command": "-workbench.action.reopenClosedEditor" },
 
@@ -285,7 +459,7 @@
     { "key": "ctrl+k",  "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus" },
     { "key": "ctrl+j",  "command": "workbench.action.terminal.focus", "when": "!terminalFocus" },
     { "key": "ctrl+t",  "command": "workbench.action.togglePanel" },
-    { "key": "ctrl+e", "command": "workbench.view.explorer" },
+    // { "key": "ctrl+e", "command": "workbench.view.explorer" },
     // { "key": "shift+k", "command": "editor.action.showHover", "when": "editorTextFocus && neovim.mode != 'insert'" },
         { "key": "ctrl+e", "command": "-actions.findWithSelection" },
         { "key": "ctrl+j", "command": "-workbench.action.togglePanel" },
@@ -296,15 +470,47 @@
         { "key": "shift+delete", "command": "-deleteFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus" },
 
     { "key": "shift+escape", "command": "notebook.cell.quitEdit", "when": "inputFocus && notebookEditorFocused && !editorHasSelection && !editorHoverVisible" },
-        {
-            "key": "escape",
-            "command": "-notebook.cell.quitEdit",
-            "when": "inputFocus && notebookEditorFocused && !editorHasSelection && !editorHoverVisible"
-        },
-        {
-            "key": "escape",
-            "command": "-editor.action.webvieweditor.hideFind",
-            "when": "webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'"
-        },
+        { "key": "escape", "command": "-notebook.cell.quitEdit", "when": "inputFocus && notebookEditorFocused && !editorHasSelection && !editorHoverVisible" },
+        { "key": "escape", "command": "-editor.action.webvieweditor.hideFind", "when": "webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'" },
+
+        { "key": "alt+f", "command": "list.find", "when": "listFocus && listSupportsFind" },
+        { "key": "alt+f", "command": "list.find.replInputFocus", "when": "view == 'workbench.panel.repl.view'" },
+        { "key": "alt+f", "command": "notebook.findNext.fromWidget", "when": "findWidgetVisible && notebookEditorFocused" },
+        { "key": "alt+f", "command": "workbench.action.browser.findNext", "when": "browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'" },
+        { "key": "alt+f", "command": "workbench.action.terminal.findNext", "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported" },
+            { "key": "f3", "command": "-list.find", "when": "listFocus && listSupportsFind" },
+            { "key": "f3", "command": "-list.find.replInputFocus", "when": "view == 'workbench.panel.repl.view'" },
+            { "key": "f3", "command": "-notebook.findNext.fromWidget", "when": "findWidgetVisible && notebookEditorFocused" },
+            { "key": "f3", "command": "-workbench.action.browser.findNext", "when": "browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'" },
+            {
+                "key": "f3",
+                "command": "-workbench.action.terminal.findNext",
+                "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+            },
+            {
+                "key": "ctrl+p",
+                "command": "workbench.action.quickOpen"
+            },
+            {
+                "key": "ctrl+shift+w",
+                "command": "-workbench.action.closeWindow"
+            },
+    // { "key": "ctrl+f", "command": "-actions.find", "when": "editorFocus || editorIsOpen" },
     // { "key": "space", "command": "whichkey.show", "when": "neovim.mode != 'insert' && !inputFocus" },
+
+
+    // TEMP debugger ahk
+    // taken from C:\pc\ahk\.vscode\keybindings.json
+    //
+    // { "key": "shift+f5",      "command": "ahk++.sync_send_debugger_state_to_program__disconnect", "when": "focusedSessionIsAttach && inDebugMode" },
+    { "key": "shift+f5",      "command": "ahk++.sync_send_debugger_state_to_program__disconnect", "when": "focusedSessionIsAttach && inDebugMode" },
+    { "key": "shift+f5",      "command": "ahk++.sync_send_debugger_state_to_program__stop",       "when": "inDebugMode && !focusedSessionIsAttach" },
+    // { "key": "ctrl+shift+f5", "command": "ahk++.sync_send_debugger_state_to_program__restart",    "when": "inDebugMode" },
+    { "key": "ctrl+shift+f5", "command": "runCommands", "when": "inDebugMode", "args": { "commands": [
+        "ahk++.sync_send_debugger_state_to_program__stop",
+        "workbench.action.debug.start"
+    ]}},
+        { "key": "shift+f5",      "command": "-workbench.action.debug.disconnect", "when": "focusedSessionIsAttach && inDebugMode" },
+        { "key": "shift+f5",      "command": "-workbench.action.debug.stop",       "when": "inDebugMode && !focusedSessionIsAttach" },
+        { "key": "ctrl+shift+f5", "command": "-workbench.action.debug.restart",    "when": "inDebugMode" },
 ]
