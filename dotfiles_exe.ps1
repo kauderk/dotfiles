@@ -1,4 +1,4 @@
-# @ai_gen(gemini 3 flash extended)
+# @ai_gen(gemini 3 flash extended, https://gemini.google.com/u/2/app/97e369a4d6e2e003)
 # this script searches for the native windows c# compiler caches its location and forwards all arguments directly to the compiled executable
 $script_dir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $cache_file = Join-Path $script_dir ".csc_cache"
@@ -13,7 +13,7 @@ if (Test-Path -LiteralPath $cache_file) {
         $compiler_path = $cached_path.Trim()
     } else {
         Remove-Item -LiteralPath $cache_file -Force
-    }
+    }   
 }
 
 if (-not $compiler_path) {

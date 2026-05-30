@@ -1,0 +1,5 @@
+User/workspaceStorage
+User/Backups
+User/History
+
+!User/workspaceStorage/storage.json

@@ -1,76 +1,191 @@
 // @ai_gen(gemini 3 flash extended)
+// this program processes structured directory filters using scoped brace blocks and flat prefix arrays to safely synchronize files with conflict validation guards
 using System;
 using System.IO;
 using System.Collections.Generic;
 
 class BackupItem {
-    public string dir;
+    public string dot_dir;
     public string alias;
-    public BackupItem[] sub_items;
+    public string dir;
+    public string dir_filter;
+}
+
+struct FilterBlock {
+    public string block_prefix;
+    public string block_directive;
+    public List<string> rule_paths;
 }
 
 struct ResolvedPath {
     public string system_path;
     public string local_destination;
     public bool is_dir_type;
+    public List<FilterBlock> filters;
 }
 
 class Program {
-    // this program handles advanced backup synchronization logic with structural recursive definitions and preventive conflict guards
     static void Main(string[] args) {
         string script_dir = AppDomain.CurrentDomain.BaseDirectory;
         string app_data = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        string local_app_data = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        string user_profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
         BackupItem[] backup_items = new BackupItem[] {
-            new BackupItem { dir = Path.Combine(local_app_data, @"Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") },
-
-            new BackupItem { dir = Path.Combine(app_data, @"alacritty\alacritty.toml") },
-
             new BackupItem {
+                dot_dir = "APPDATA",
                 alias = "vscode",
-                sub_items = new BackupItem[] {
-                    new BackupItem { dir = Path.Combine(app_data, @"Code\User\settings.json") },
-                    new BackupItem { dir = Path.Combine(app_data, @"Code\User\keybindings.json") },
-                    new BackupItem { dir = Path.Combine(app_data, @"Code\User\snippets") },
-                    new BackupItem { dir = Path.Combine(app_data, @"Code\User\globalStorage\state.vscdb") },
-                    new BackupItem { dir = Path.Combine(app_data, @"Code\extensions") }
-                }
+                dir = Path.Combine(app_data, "Code"),
+                dir_filter = @"
+                    > includes_filter
+                    User\settings.json
+                    User/keybindings.json
+
+                    # include everthing inside snippets folder
+                    User/snippets/
+
+                    User/tasks.json
+
+                    # include everything inside profiles, except for 'User/profiles/builtin'
+                    User/profiles/ > excludes_filter {
+                        User/profiles/builtin/
+                    }
+
+                    User/globalStorage/state.vscdb
+                    User/globalStorage/storage.json
+                "
+            },
+            new BackupItem {
+                dot_dir = "USER",
+                dir = Path.Combine(user_profile, ".vscode"),
+                dir_filter = @"
+                    # explicit use of '> includes_filter'
+                    extensions/extensions.json
+                    argv.json
+                "
             }
         };
 
         List<ResolvedPath> flat_list = new List<ResolvedPath>();
-        Action<BackupItem[], string> resolve_items = null;
 
-        resolve_items = (items, current_prefix) => {
-            foreach (BackupItem item in items) {
-                string next_prefix = current_prefix;
-                if (!string.IsNullOrEmpty(item.alias)) {
-                    next_prefix = Path.Combine(current_prefix, item.alias);
-                }
+        foreach (BackupItem item in backup_items) {
+            if (string.IsNullOrEmpty(item.dir)) {
+                continue;
+            }
 
-                if (item.sub_items != null) {
-                    resolve_items(item.sub_items, next_prefix);
-                } else if (!string.IsNullOrEmpty(item.dir)) {
-                    string leaf_name = Path.GetFileName(item.dir);
-                    string local_dest = Path.Combine(next_prefix, leaf_name);
-                    
-                    bool is_dir = Directory.Exists(item.dir);
-                    if (!is_dir && !File.Exists(item.dir)) {
-                        is_dir = string.IsNullOrEmpty(Path.GetExtension(item.dir));
-                    }
-
-                    ResolvedPath resolved;
-                    resolved.system_path = item.dir;
-                    resolved.local_destination = local_dest;
-                    resolved.is_dir_type = is_dir;
-                    
-                    flat_list.Add(resolved);
+            bool is_dir = Directory.Exists(item.dir);
+            if (!is_dir) {
+                if (!File.Exists(item.dir)) {
+                    is_dir = string.IsNullOrEmpty(Path.GetExtension(item.dir));
                 }
             }
-        };
 
-        resolve_items(backup_items, "");
+            if (!is_dir) {
+                if (!string.IsNullOrEmpty(item.dir_filter)) {
+                    Console.WriteLine("error: dir_filter can only be used when dir is a folder");
+                    Environment.Exit(1);
+                }
+            }
+
+            string local_dest = "";
+            if (!string.IsNullOrEmpty(item.alias)) {
+                local_dest = item.alias;
+            } else {
+                local_dest = Path.GetFileName(item.dir);
+            }
+
+            List<FilterBlock> parsed_blocks = new List<FilterBlock>();
+            
+            FilterBlock root_block;
+            root_block.block_prefix = "";
+            root_block.block_directive = "includes_filter";
+            root_block.rule_paths = new List<string>();
+
+            FilterBlock active_block = root_block;
+            bool inside_custom_block = false;
+
+            if (!string.IsNullOrEmpty(item.dir_filter)) {
+                char[] newline_chars = new char[] { '\r', '\n' };
+                string[] lines = item.dir_filter.Split(newline_chars, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string raw_line in lines) {
+                    string clean_line = raw_line.Trim();
+                    
+                    if (clean_line.Contains("#")) {
+                        int hash_index = clean_line.IndexOf('#');
+                        clean_line = clean_line.Substring(0, hash_index).Trim();
+                    }
+
+                    if (string.IsNullOrEmpty(clean_line)) {
+                        continue;
+                    }
+
+                    if (clean_line == "}") {
+                        parsed_blocks.Add(active_block);
+                        active_block = root_block;
+                        inside_custom_block = false;
+                        continue;
+                    }
+
+                    if (clean_line.StartsWith(">")) {
+                        string directive_type = clean_line.Substring(1).Trim();
+                        root_block.block_directive = directive_type;
+                        active_block.block_directive = directive_type;
+                        continue;
+                    }
+
+                    if (clean_line.Contains("{")) {
+                        int brace_index = clean_line.IndexOf('{');
+                        string block_decl = clean_line.Substring(0, brace_index).Trim();
+                        
+                        string block_prefix = "";
+                        string block_directive = "includes_filter";
+
+                        if (block_decl.Contains(">")) {
+                            int arrow_index = block_decl.IndexOf('>');
+                            block_prefix = block_decl.Substring(0, arrow_index).Trim();
+                            block_directive = block_decl.Substring(arrow_index + 1).Trim();
+                        } else {
+                            block_prefix = block_decl;
+                        }
+
+                        block_prefix = block_prefix.Replace('\\', '/').Trim('/');
+                        
+                        active_block.block_prefix = block_prefix;
+                        active_block.block_directive = block_directive;
+                        active_block.rule_paths = new List<string>();
+                        inside_custom_block = true;
+                        continue;
+                    }
+
+                    string normalized_rule = clean_line.Replace('\\', '/');
+                    bool ends_with_slash = normalized_rule.EndsWith("/");
+                    normalized_rule = normalized_rule.Trim('/');
+                    
+                    if (ends_with_slash) {
+                        normalized_rule = normalized_rule + "/";
+                    }
+
+                    if (inside_custom_block) {
+                        active_block.rule_paths.Add(normalized_rule);
+                    } else {
+                        root_block.rule_paths.Add(normalized_rule);
+                    }
+                }
+            }
+
+            if (inside_custom_block) {
+                parsed_blocks.Add(active_block);
+            }
+            parsed_blocks.Insert(0, root_block);
+
+            ResolvedPath resolved;
+            resolved.system_path = item.dir;
+            resolved.local_destination = local_dest;
+            resolved.is_dir_type = is_dir;
+            resolved.filters = parsed_blocks;
+            
+            flat_list.Add(resolved);
+        }
 
         if (args.Length == 0 || args[0] == "+help") {
             Console.WriteLine("commands:");
@@ -135,6 +250,35 @@ class Program {
                 Environment.Exit(1);
             }
 
+            // display planned synchronization map before execution
+            Console.WriteLine("execution preview for +pull:");
+            foreach (ResolvedPath resolved_item in flat_list) {
+                string absolute_local = Path.Combine(script_dir, resolved_item.local_destination);
+                string preview_pull_dir = Path.Combine(script_dir, "last_pull");
+                string backup_dest = Path.Combine(preview_pull_dir, resolved_item.local_destination);
+
+                Console.WriteLine("  target name: " + resolved_item.local_destination);
+                if (resolved_item.is_dir_type) {
+                    Console.WriteLine("    type: folder path (entirely/recursively)");
+                } else {
+                    Console.WriteLine("    type: single file path");
+                }
+                Console.WriteLine("    preservation archive target:");
+                Console.WriteLine("      from: " + absolute_local);
+                Console.WriteLine("      to:   " + backup_dest);
+                Console.WriteLine("    active pull sync target:");
+                Console.WriteLine("      from: " + resolved_item.system_path);
+                Console.WriteLine("      to:   " + absolute_local);
+                Console.WriteLine();
+            }
+
+            Console.Write("do you want to proceed with the pull operation? (y/n): ");
+            string pull_confirmation = Console.ReadLine();
+            if (string.IsNullOrEmpty(pull_confirmation) || pull_confirmation.Trim().ToLower() != "y") {
+                Console.WriteLine("operation denied and aborted");
+                Environment.Exit(1);
+            }
+
             string last_pull_dir = Path.Combine(script_dir, "last_pull");
             if (Directory.Exists(last_pull_dir)) {
                 Directory.Delete(last_pull_dir, true);
@@ -152,7 +296,7 @@ class Program {
                     }
                     File.Copy(absolute_local, backup_dest, true);
                 } else if (Directory.Exists(absolute_local)) {
-                    CopyDirectory(absolute_local, backup_dest);
+                    CopyDirectory(absolute_local, absolute_local, backup_dest, resolved_item.filters);
                 }
             }
 
@@ -164,7 +308,7 @@ class Program {
                         if (Directory.Exists(absolute_local)) {
                             Directory.Delete(absolute_local, true);
                         }
-                        CopyDirectory(resolved_item.system_path, absolute_local);
+                        CopyDirectory(resolved_item.system_path, resolved_item.system_path, absolute_local, resolved_item.filters);
                         Console.WriteLine("collected folder: " + resolved_item.local_destination);
                     } else {
                         Console.WriteLine("skipped, system folder missing: " + resolved_item.system_path);
@@ -184,6 +328,35 @@ class Program {
             }
             Console.WriteLine("pull operation finished safely");
         } else if (command == "+push") {
+            // display planned synchronization map before execution
+            Console.WriteLine("execution preview for +push:");
+            foreach (ResolvedPath resolved_item in flat_list) {
+                string absolute_local = Path.Combine(script_dir, resolved_item.local_destination);
+                string preview_push_dir = Path.Combine(script_dir, "last_push");
+                string backup_dest = Path.Combine(preview_push_dir, resolved_item.local_destination);
+
+                Console.WriteLine("  target name: " + resolved_item.local_destination);
+                if (resolved_item.is_dir_type) {
+                    Console.WriteLine("    type: folder path (entirely/recursively)");
+                } else {
+                    Console.WriteLine("    type: single file path");
+                }
+                Console.WriteLine("    preservation archive target:");
+                Console.WriteLine("      from: " + resolved_item.system_path);
+                Console.WriteLine("      to:   " + backup_dest);
+                Console.WriteLine("    active push sync target:");
+                Console.WriteLine("      from: " + absolute_local);
+                Console.WriteLine("      to:   " + resolved_item.system_path);
+                Console.WriteLine();
+            }
+
+            Console.Write("do you want to proceed with the push operation? (y/n): ");
+            string push_confirmation = Console.ReadLine();
+            if (string.IsNullOrEmpty(push_confirmation) || push_confirmation.Trim().ToLower() != "y") {
+                Console.WriteLine("operation denied and aborted");
+                Environment.Exit(1);
+            }
+
             string last_push_dir = Path.Combine(script_dir, "last_push");
             if (Directory.Exists(last_push_dir)) {
                 Directory.Delete(last_push_dir, true);
@@ -200,7 +373,7 @@ class Program {
                     }
                     File.Copy(resolved_item.system_path, backup_dest, true);
                 } else if (Directory.Exists(resolved_item.system_path)) {
-                    CopyDirectory(resolved_item.system_path, backup_dest);
+                    CopyDirectory(resolved_item.system_path, resolved_item.system_path, backup_dest, resolved_item.filters);
                 }
             }
 
@@ -212,7 +385,7 @@ class Program {
                         if (Directory.Exists(resolved_item.system_path)) {
                             Directory.Delete(resolved_item.system_path, true);
                         }
-                        CopyDirectory(absolute_local, resolved_item.system_path);
+                        CopyDirectory(absolute_local, absolute_local, resolved_item.system_path, resolved_item.filters);
                         Console.WriteLine("overwrote system folder: " + resolved_item.system_path);
                     } else {
                         Console.WriteLine("skipped, local folder missing: " + resolved_item.local_destination);
@@ -236,16 +409,84 @@ class Program {
         }
     }
 
-    static void CopyDirectory(string source_dir, string dest_dir) {
-        // this function recursively copies all files and subdirectories from a source folder to a destination folder
-        Directory.CreateDirectory(dest_dir);
-        foreach (string file in Directory.GetFiles(source_dir)) {
-            string dest_file = Path.Combine(dest_dir, Path.GetFileName(file));
+    static bool IsPathAllowed(string relative_path, List<FilterBlock> blocks) {
+        if (blocks == null) {
+            return true;
+        }
+        if (blocks.Count == 0) {
+            return true;
+        }
+
+        string norm_path = relative_path.Replace('\\', '/');
+        
+        FilterBlock winning_block = blocks[0];
+        int longest_prefix_length = -1;
+
+        foreach (FilterBlock block in blocks) {
+            if (block.block_prefix == "") {
+                continue;
+            }
+            string match_prefix = block.block_prefix + "/";
+            if (norm_path.StartsWith(match_prefix, StringComparison.OrdinalIgnoreCase)) {
+                int prefix_len = block.block_prefix.Length;
+                if (prefix_len > longest_prefix_length) {
+                    longest_prefix_length = prefix_len;
+                    winning_block = block;
+                }
+            }
+        }
+
+        bool match_found = false;
+        foreach (string rule in winning_block.rule_paths) {
+            if (rule.EndsWith("/")) {
+                if (norm_path.StartsWith(rule, StringComparison.OrdinalIgnoreCase)) {
+                    match_found = true;
+                    break;
+                }
+            } else {
+                if (string.Equals(norm_path, rule, StringComparison.OrdinalIgnoreCase)) {
+                    match_found = true;
+                    break;
+                }
+            }
+        }
+
+        if (winning_block.block_directive == "includes_filter") {
+            return match_found;
+        }
+
+        return !match_found;
+    }
+
+    static void CopyDirectory(string source_root, string current_dir, string dest_root, List<FilterBlock> filters) {
+        Directory.CreateDirectory(dest_root);
+        string[] files = Directory.GetFiles(current_dir);
+
+        foreach (string file in files) {
+            int root_len = source_root.Length;
+            string relative_path = file.Substring(root_len).TrimStart(Path.DirectorySeparatorChar);
+            
+            bool allowed = IsPathAllowed(relative_path, filters);
+            if (!allowed) {
+                continue;
+            }
+            string file_name = Path.GetFileName(file);
+            string dest_file = Path.Combine(dest_root, file_name);
             File.Copy(file, dest_file, true);
         }
-        foreach (string sub_dir in Directory.GetDirectories(source_dir)) {
-            string dest_sub_dir = Path.Combine(dest_dir, Path.GetFileName(sub_dir));
-            CopyDirectory(sub_dir, dest_sub_dir);
+
+        string[] sub_dirs = Directory.GetDirectories(current_dir);
+        foreach (string sub_dir in sub_dirs) {
+            int root_len = source_root.Length;
+            string relative_path = sub_dir.Substring(root_len).TrimStart(Path.DirectorySeparatorChar);
+            
+            bool allowed = IsPathAllowed(relative_path + "/", filters);
+            if (!allowed) {
+                continue;
+            }
+            string dir_name = Path.GetFileName(sub_dir);
+            string dest_sub_dir = Path.Combine(dest_root, dir_name);
+            CopyDirectory(source_root, sub_dir, dest_sub_dir, filters);
         }
     }
 }
